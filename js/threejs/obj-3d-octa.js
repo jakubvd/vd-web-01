@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
     const containers = document.querySelectorAll('.obj-3d-octa'); // Select all elements with the class 'obj-3d-octa'
 
-    // Only run the code for viewports 479px or wider
-    if (window.innerWidth >= 479) {
+    // Only run the code for viewports 319px or wider
+    if (window.innerWidth >= 319) {
         containers.forEach(container => {
 
             function initOctahedronScene(container) {

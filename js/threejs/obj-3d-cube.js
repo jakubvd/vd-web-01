@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
     const containers = document.querySelectorAll('.obj-3d-cube'); // Select all elements with the class 'obj-3d-cube'
 
-    // Only run the code for viewports 992px or wider
-    if (window.innerWidth >= 992) {
+    // Only run the code for viewports 479px or wider
+    if (window.innerWidth >= 479) {
         containers.forEach(container => {
 
             function initCubeScene(container) {

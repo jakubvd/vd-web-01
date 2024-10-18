@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
     const containers = document.querySelectorAll('.obj-3d-icosa'); // Select all elements with the class 'obj-3d-icosa'
 
-    // Only run the code for viewports 992px or wider
-    if (window.innerWidth >= 992) {
+    // Only run the code for viewports 319px or wider
+    if (window.innerWidth >= 319) {
         containers.forEach(container => {
 
             function initIcosahedronScene(container) {

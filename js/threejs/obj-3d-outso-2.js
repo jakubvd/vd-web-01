@@ -4,13 +4,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     svgContainers.forEach(svgContainer => {
         const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xff0000); // Set scene background to red
+        
         const camera = new THREE.PerspectiveCamera(75, svgContainer.clientWidth / svgContainer.clientHeight, 0.1, 1000);
         camera.position.z = 45;
 
-        // Initialize the WebGLRenderer with red background color, disable alpha transparency
+        // Initialize the WebGLRenderer with forced background color
         const renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });
         renderer.setSize(svgContainer.clientWidth, svgContainer.clientHeight);
-        renderer.setClearColor(0xff0000, 1); // Set background color to red (hex: #ff0000) and opacity to 1 (opaque)
+        renderer.setClearColor(new THREE.Color(0xff0000), 1); // Force red background color with full opacity
         svgContainer.appendChild(renderer.domElement);
 
         const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);

@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // Select only elements with both 'obj-3d-services' and 'is-D' classes
     const svgContainers = document.querySelectorAll('.obj-3d-services.is-D');
 
     svgContainers.forEach(svgContainer => {
@@ -78,12 +79,21 @@ document.addEventListener("DOMContentLoaded", function() {
                 const height = svgContainer.clientHeight;
                 renderer.setSize(width, height);
                 camera.aspect = width / height;
+
+                // Adjust FOV for small viewports
+                if (window.innerWidth <= 478) {
+                    camera.fov = 85;  // Increase FOV for small screens
+                } else {
+                    camera.fov = 75;  // Default FOV for larger screens
+                }
                 camera.updateProjectionMatrix();
 
-                if (window.innerWidth <= 478) {
-                    camera.fov = 85; // Adjust field of view for small viewports
-                    camera.updateProjectionMatrix();
-                }
+                // Recalculate object position based on the new size
+                const box = new THREE.Box3().setFromObject(group);
+                const center = box.getCenter(new THREE.Vector3());
+                group.position.x = -center.x;
+                group.position.y = -center.y;
+                group.position.z = -center.z;
             }
 
             adjustViewport(); // Adjust right after setup

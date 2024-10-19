@@ -7,10 +7,10 @@ document.addEventListener("DOMContentLoaded", function() {
         const camera = new THREE.PerspectiveCamera(75, svgContainer.clientWidth / svgContainer.clientHeight, 0.1, 1000);
         camera.position.z = 45;
 
-        // Initialize the WebGLRenderer with red background color
+        // Initialize the WebGLRenderer with red background color, disable alpha transparency
         const renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });
         renderer.setSize(svgContainer.clientWidth, svgContainer.clientHeight);
-        renderer.setClearColor(0xff0000); // Set background color to red
+        renderer.setClearColor(0xff0000, 1); // Set background color to red (hex: #ff0000) and opacity to 1 (opaque)
         svgContainer.appendChild(renderer.domElement);
 
         const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);

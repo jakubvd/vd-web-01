@@ -7,8 +7,10 @@ document.addEventListener("DOMContentLoaded", function() {
         const camera = new THREE.PerspectiveCamera(75, svgContainer.clientWidth / svgContainer.clientHeight, 0.1, 1000);
         camera.position.z = 45;
 
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        // Initialize the WebGLRenderer with red background color
+        const renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });
         renderer.setSize(svgContainer.clientWidth, svgContainer.clientHeight);
+        renderer.setClearColor(0xff0000); // Set background color to red
         svgContainer.appendChild(renderer.domElement);
 
         const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
@@ -73,22 +75,19 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             animate();
 
-            // Function to adjust camera and renderer based on viewport size
             function adjustViewport() {
                 const width = svgContainer.clientWidth;
                 const height = svgContainer.clientHeight;
                 renderer.setSize(width, height);
                 camera.aspect = width / height;
 
-                // Adjust FOV for small viewports
                 if (window.innerWidth <= 478) {
-                    camera.fov = 85;  // Increase FOV for small screens
+                    camera.fov = 85;
                 } else {
-                    camera.fov = 75;  // Default FOV for larger screens
+                    camera.fov = 75;
                 }
                 camera.updateProjectionMatrix();
 
-                // Recalculate object position based on the new size
                 const box = new THREE.Box3().setFromObject(group);
                 const center = box.getCenter(new THREE.Vector3());
                 group.position.x = -center.x;
@@ -98,7 +97,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
             adjustViewport(); // Adjust right after setup
 
-            // Adjust on resize and orientation change
             window.addEventListener('resize', adjustViewport);
             window.addEventListener('orientationchange', adjustViewport);
         });

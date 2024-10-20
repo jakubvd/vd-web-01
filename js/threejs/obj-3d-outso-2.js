@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const svgContainers = document.querySelectorAll('.obj-3d-services.is-D');
 
     svgContainers.forEach(svgContainer => {
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
         scene.add(new THREE.AmbientLight(0x505050));
 
         const loader = new THREE.SVGLoader();
-        loader.load('https://cdn.prod.website-files.com/670da08b0c9f472a36a20581/670da08b0c9f472a36a20634_out-b1-svg.svg', function(data) {
+        loader.load('https://cdn.prod.website-files.com/670da08b0c9f472a36a20581/670da08b0c9f472a36a20634_out-b1-svg.svg', function (data) {
             const paths = data.paths;
             const group = new THREE.Group();
             group.scale.multiplyScalar(0.1);
@@ -55,32 +55,24 @@ document.addEventListener("DOMContentLoaded", function() {
             scene.add(pivot);
             pivot.add(group);
 
-            function adjustSceneForAspect() {
+            // Update on resize to fix aspect ratio and scaling issues
+            function onResize() {
                 const width = svgContainer.clientWidth;
                 const height = svgContainer.clientHeight;
-                const aspectRatio = width / height;
-
-                // Adjust object scale or camera position based on aspect ratio (for 478px and below)
-                if (width <= 478) {
-                    camera.aspect = aspectRatio;
-                    camera.position.z = 60; // Increase camera distance for better visibility
-                } else {
-                    camera.aspect = aspectRatio;
-                    camera.position.z = 45; // Default camera distance for larger viewports
-                }
-                camera.updateProjectionMatrix();
                 renderer.setSize(width, height);
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
             }
+
+            // Ensure canvas and camera resize properly when changing orientation or viewport size
+            window.addEventListener('resize', onResize);
 
             function animate() {
                 requestAnimationFrame(animate);
-                pivot.rotation.y += 0.009;
+                pivot.rotation.y += 0.009; // Rotate the object around its own vertical axis
                 renderer.render(scene, camera);
             }
             animate();
-
-            window.addEventListener('resize', adjustSceneForAspect);
-            adjustSceneForAspect();
         });
     });
 });

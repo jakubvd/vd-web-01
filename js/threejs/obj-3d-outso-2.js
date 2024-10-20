@@ -1,18 +1,13 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Select only elements with both 'obj-3d-services' and 'is-D' classes
     const svgContainers = document.querySelectorAll('.obj-3d-services.is-D');
 
     svgContainers.forEach(svgContainer => {
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0xff0000); // Set scene background to red
-        
         const camera = new THREE.PerspectiveCamera(75, svgContainer.clientWidth / svgContainer.clientHeight, 0.1, 1000);
         camera.position.z = 45;
 
-        // Initialize the WebGLRenderer with forced background color
-        const renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(svgContainer.clientWidth, svgContainer.clientHeight);
-        renderer.setClearColor(new THREE.Color(0xff0000), 1); // Force red background color with full opacity
         svgContainer.appendChild(renderer.domElement);
 
         const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
@@ -60,47 +55,32 @@ document.addEventListener("DOMContentLoaded", function() {
             scene.add(pivot);
             pivot.add(group);
 
-            const controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableZoom = false;
-            controls.enablePan = false;
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.1;
-            controls.rotateSpeed = 0.2;
-            controls.minPolarAngle = Math.PI / 2;
-            controls.maxPolarAngle = Math.PI / 2;
+            function adjustSceneForAspect() {
+                const width = svgContainer.clientWidth;
+                const height = svgContainer.clientHeight;
+                const aspectRatio = width / height;
+
+                // Adjust object scale or camera position based on aspect ratio (for 478px and below)
+                if (width <= 478) {
+                    camera.aspect = aspectRatio;
+                    camera.position.z = 60; // Increase camera distance for better visibility
+                } else {
+                    camera.aspect = aspectRatio;
+                    camera.position.z = 45; // Default camera distance for larger viewports
+                }
+                camera.updateProjectionMatrix();
+                renderer.setSize(width, height);
+            }
 
             function animate() {
                 requestAnimationFrame(animate);
                 pivot.rotation.y += 0.009;
-                controls.update();
                 renderer.render(scene, camera);
             }
             animate();
 
-            function adjustViewport() {
-                const width = svgContainer.clientWidth;
-                const height = svgContainer.clientHeight;
-                renderer.setSize(width, height);
-                camera.aspect = width / height;
-
-                if (window.innerWidth <= 478) {
-                    camera.fov = 85;
-                } else {
-                    camera.fov = 75;
-                }
-                camera.updateProjectionMatrix();
-
-                const box = new THREE.Box3().setFromObject(group);
-                const center = box.getCenter(new THREE.Vector3());
-                group.position.x = -center.x;
-                group.position.y = -center.y;
-                group.position.z = -center.z;
-            }
-
-            adjustViewport(); // Adjust right after setup
-
-            window.addEventListener('resize', adjustViewport);
-            window.addEventListener('orientationchange', adjustViewport);
+            window.addEventListener('resize', adjustSceneForAspect);
+            adjustSceneForAspect();
         });
     });
 });

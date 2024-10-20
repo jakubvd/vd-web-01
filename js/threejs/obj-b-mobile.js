@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Select only elements with obj-c-mobile
-    const svgContainers = document.querySelectorAll('.obj-c-mobile');
+    // Select only elements with obj-b-mobile
+    const svgContainers = document.querySelectorAll('.obj-b-mobile');
 
     svgContainers.forEach(svgContainer => {
         const scene = new THREE.Scene();
@@ -16,10 +16,10 @@ document.addEventListener("DOMContentLoaded", function() {
         scene.add(new THREE.AmbientLight(0x505050));
 
         const loader = new THREE.SVGLoader();
-        loader.load('https://cdn.prod.website-files.com/671432984c4141713295f3e9/67158ce7b37a32f88f072114_maint-b2-4.svg', function(data) {
+        loader.load('https://cdn.prod.website-files.com/670da08b0c9f472a36a20581/670da08b0c9f472a36a206ad_des-b1-up-svg.svg', function(data) {
             const paths = data.paths;
             const group = new THREE.Group();
-            group.scale.multiplyScalar(0.095);
+            group.scale.multiplyScalar(0.1);
             group.scale.y *= 1.25;
 
             const material = new THREE.MeshStandardMaterial({

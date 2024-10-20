@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     svgContainers.forEach(svgContainer => {
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, svgContainer.clientWidth / svgContainer.clientHeight, 0.1, 1000);
-        camera.position.z = 50;
+        camera.position.z = 55;
 
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(svgContainer.clientWidth, svgContainer.clientHeight);

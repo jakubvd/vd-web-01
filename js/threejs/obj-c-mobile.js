@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", function() {
         loader.load('https://cdn.prod.website-files.com/670da08b0c9f472a36a20581/670efa3854d0060dbe518d97_maint-b2%20(2).svg', function(data) {
             const paths = data.paths;
             const group = new THREE.Group();
-            group.scale.multiplyScalar(0.1);
-            group.scale.y *= 1.1;
+            group.scale.multiplyScalar(0.09);
+            group.scale.y *= 1.2;
 
             const material = new THREE.MeshStandardMaterial({
                 color: 0x131211,

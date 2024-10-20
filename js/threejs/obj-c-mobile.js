@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     svgContainers.forEach(svgContainer => {
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, svgContainer.clientWidth / svgContainer.clientHeight, 0.1, 1000);
-        camera.position.z = 60;
+        camera.position.z = 65;
 
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(svgContainer.clientWidth, svgContainer.clientHeight);
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const paths = data.paths;
             const group = new THREE.Group();
             group.scale.multiplyScalar(0.1);
-            group.scale.y *= 1.23;
+            group.scale.y *= 1.20;
 
             const material = new THREE.MeshStandardMaterial({
                 color: 0x131211,

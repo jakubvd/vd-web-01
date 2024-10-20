@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
         scene.add(new THREE.AmbientLight(0x505050));
 
         const loader = new THREE.SVGLoader();
-        loader.load('https://cdn.prod.website-files.com/670da08b0c9f472a36a20581/670efa3854d0060dbe518d97_maint-b2%20(2).svg', function(data) {
+        loader.load('https://cdn.prod.website-files.com/671432984c4141713295f3e9/67158ce7b37a32f88f072114_maint-b2-4.svg', function(data) {
             const paths = data.paths;
             const group = new THREE.Group();
             group.scale.multiplyScalar(0.09);

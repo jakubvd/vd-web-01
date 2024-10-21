@@ -22,10 +22,10 @@ document.addEventListener("DOMContentLoaded", function() {
             scene.add(new THREE.AmbientLight(0x505050));
 
             const loader = new THREE.SVGLoader();
-            loader.load('https://cdn.prod.website-files.com/671432984c4141713295f3e9/67158ce7b37a32f88f072114_maint-b2-4.svg', function(data) {
+            loader.load('https://cdn.prod.website-files.com/670ad0d1afb3192c7dfff38c/670ad0d1afb3192c7dfff486_dev-b1-svg.svg', function(data) {
                 const paths = data.paths;
                 const group = new THREE.Group();
-                group.scale.multiplyScalar(0.097);
+                group.scale.multiplyScalar(0.1);
                 group.scale.y *= 1.25;
 
                 const material = new THREE.MeshStandardMaterial({

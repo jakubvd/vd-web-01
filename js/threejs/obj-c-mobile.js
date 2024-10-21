@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
         loader.load('https://cdn.prod.website-files.com/671432984c4141713295f3e9/67158ce7b37a32f88f072114_maint-b2-4.svg', function(data) {
             const paths = data.paths;
             const group = new THREE.Group();
-            group.scale.multiplyScalar(0.095);
+            group.scale.multiplyScalar(0.1);
             group.scale.y *= 1.25;
 
             const material = new THREE.MeshStandardMaterial({

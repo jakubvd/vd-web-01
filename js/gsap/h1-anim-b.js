@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Register GSAP TextPlugin
-    gsap.registerPlugin(TextPlugin);
+    // Register GSAP Plugins
+    gsap.registerPlugin(ScrambleTextPlugin, TextPlugin);
 
     const h1Wrapper = document.querySelector('.h1-wrapper'); // H1 wrapper
     const firstLine = document.querySelector('.heading-style-h1-typed .line1'); // First line in h1
@@ -9,13 +9,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const words = ['Projektowanie', 'Development', 'Utrzymanie', 'Outsourcing']; // Words to cycle through
     let currentWord = 0; // Keep track of the current word
 
-    // Typing effect for H1 first line (cycling through words)
+    // Typing effect for H1 first line (cycling through words) with scramble effect
     function typeWords() {
         function typeNextWord() {
             let word = words[currentWord]; // Get the current word
             gsap.to(firstLine, {
-                duration: 1.4, // Duration of the typing effect
-                text: { value: word }, // Use TextPlugin to type the word
+                duration: 1.4, // Duration of the scramble effect
+                scrambleText: { text: word, chars: "01", speed: 0.4, revealDelay: 0.05 }, // ScrambleText effect
                 ease: "power2.inOut",
                 onUpdate: function () {
                     firstLine.innerHTML += '<span class="cursor">_</span>'; // Ensure cursor is visible
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
-        // Function to erase the word and move to the next
+        // Function to erase the word and move to the next using TextPlugin for smooth transition
         function eraseWord() {
             gsap.to(firstLine, {
                 duration: 1.5,
@@ -42,11 +42,11 @@ document.addEventListener('DOMContentLoaded', function () {
         typeNextWord(); // Start typing the first word
     }
 
-    // Static typing effect for second and third lines without the need to erase
+    // Static typing effect for second and third lines with ScrambleText
     function applyStaticEffect(line, textContent) {
         gsap.to(line, {
             duration: 1.4, // Duration of the text reveal
-            text: { value: textContent }, // Use TextPlugin to reveal the text
+            scrambleText: { text: textContent, chars: "01", speed: 0.4, revealDelay: 0.05 }, // ScrambleText effect for static lines
             ease: "power2.out",
             onComplete: function () {
                 line.innerHTML += '<span class="cursor">_</span>'; // Add the cursor

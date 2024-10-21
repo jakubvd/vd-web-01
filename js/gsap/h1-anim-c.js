@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (charIndex > 0) {
                 line.textContent = line.textContent.slice(0, charIndex - 1) + '_';
                 charIndex--;
-                setTimeout(eraseChar, 50);
+                setTimeout(eraseChar, 30);
             } else {
                 line.textContent = '_';
                 setTimeout(callback, 250);
@@ -48,12 +48,12 @@ document.addEventListener('DOMContentLoaded', function () {
         function typeNextWord() {
             let word = words[currentWord];
             gsap.to(firstLine, {
-                duration: 1.4,
+                duration: 2.5,
                 scrambleText: {
                     text: word,
                     chars: "01",
                     speed: 0.1,
-                    revealDelay: 0.05,
+                    revealDelay: 1.0,
                 },
                 onUpdate: function () {
                     firstLine.innerHTML = firstLine.textContent + '<span class="cursor">_</span>';
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (charIndex > 0) {
                     firstLine.innerHTML = word.slice(0, charIndex - 1) + '<span class="cursor">_</span>';
                     charIndex--;
-                    setTimeout(eraseChar, 50);
+                    setTimeout(eraseChar, 30);
                 } else {
                     currentWord = (currentWord + 1) % words.length;
                     setTimeout(typeNextWord, 250);

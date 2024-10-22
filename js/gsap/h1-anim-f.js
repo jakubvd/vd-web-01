@@ -39,12 +39,12 @@ document.addEventListener('DOMContentLoaded', function () {
         function typeNextWord() {
             let word = words[currentWord];
             gsap.to(firstLine, {
-                duration: 2.5,
+                duration: 2.0,
                 scrambleText: {
                     text: word,
                     chars: "01",
-                    speed: 0.05, // Slower scramble speed
-                    revealDelay: 0.005, // Faster reveal to minimize scrambling
+                    speed: 0.01, // Further reduced speed for scramble
+                    revealDelay: 0.001, // Even faster reveal delay
                 },
                 onUpdate: function () {
                     firstLine.innerHTML = firstLine.textContent + '<span class="cursor">_</span>';
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Apply static typing effect without cursor for specific lines
-    function applyStaticEffect(line, duration = 1.4, speed = 0.05, hideCursor = false) { // Same speed for consistency
+    function applyStaticEffect(line, duration = 1.4, speed = 0.01, hideCursor = false) { // Same minimal scramble speed for consistency
         const originalText = line.textContent.replace('_', '');
         applyBinaryEffect(line, function () {
             gsap.to(line, {
@@ -83,8 +83,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 scrambleText: {
                     text: originalText,
                     chars: "01",
-                    speed: speed, // Slow speed for minimal scrambling
-                    revealDelay: 0.005, // Quick reveal to limit scrambling
+                    speed: speed, // Minimal scramble speed
+                    revealDelay: 0.001, // Very quick reveal to reduce scrambling
                 },
                 onUpdate: function () {
                     if (!hideCursor) {
@@ -111,8 +111,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (target === h1Wrapper) {
                         // Apply animations to H1 lines only when the full H1 wrapper is in view
                         applyBinaryEffect(firstLine, typeWords);
-                        applyStaticEffect(secondLine, 1.4, 0.05, true); // Apply same scramble effect to line2
-                        applyStaticEffect(thirdLine, 1.4, 0.05); // Apply same scramble effect to line3
+                        applyStaticEffect(secondLine, 1.4, 0.01, true); // Apply same minimal scramble effect to line2
+                        applyStaticEffect(thirdLine, 1.4, 0.01); // Apply same minimal scramble effect to line3
                     }
                     observer.unobserve(target); // Stop observing after the animation is triggered
                 }

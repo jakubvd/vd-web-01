@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 scrambleText: {
                     text: word,
                     chars: "01",
-                    speed: 0.1,
+                    speed: 2.5,
                     revealDelay: 0.01,
                 },
                 onUpdate: function () {

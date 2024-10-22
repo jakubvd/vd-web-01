@@ -6,20 +6,22 @@ document.addEventListener('DOMContentLoaded', function () {
     const firstLine = document.querySelector('.heading-style-h1-typed .line1'); // First line in h1
     const secondLine = document.querySelector('.heading-style-h1-typed .line2'); // Second line in h1
     const thirdLine = document.querySelector('.heading-style-h1-typed .line3'); // Third line in h1
-    const words = ['PROJEKTOWANIE', 'DEVELOPMENT', 'UTRZYMANIE', 'OUTSOURCING']; // Words in capital letters for Line 1
+    const words = ['Projektowanie', 'Development', 'Utrzymanie', 'Outsourcing']; // Removed 'Wdrożenia'
     let currentWord = 0;
 
-    // ScrambleText settings for a smoother "01" effect
-    const scrambleSettings = {
-        chars: "01", // Keep binary "01" characters for scrambling
-        speed: 1, // Slower scramble speed for a smoother effect
-        revealDelay: 0.2 // Small delay before revealing the final word
-    };
+    // Generates a binary string
+    function generateShuffledBinaryString(length) {
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += Math.random() > 0.5 ? '1' : '0';
+        }
+        return result;
+    }
 
-    // Apply even "010101..." binary string for initial effect and ensure visibility
+    // Apply binary effect and backspacing for all lines
     function applyBinaryEffect(line, callback) {
-        line.textContent = "010101010101010"; // Static, even-length binary string for visual symmetry
-        line.style.opacity = 1; // Make sure the line is visible
+        line.textContent = generateShuffledBinaryString(15);
+        line.classList.add('show');
         setTimeout(function () {
             backspace(line, callback);
         }, 500);
@@ -41,22 +43,24 @@ document.addEventListener('DOMContentLoaded', function () {
         eraseChar();
     }
 
-    // Typing effect for Line 1 (cycling through words)
+    // GSAP ScrambleText for H1 line1 with subtle scrambling
     function typeWords() {
         function typeNextWord() {
             let word = words[currentWord];
             gsap.to(firstLine, {
-                duration: 2, // Longer duration for smoother effect
+                duration: 1.4,
                 scrambleText: {
                     text: word,
-                    ...scrambleSettings, // Keep "01" scramble settings for Line 1
+                    chars: "01",
+                    speed: 0.15, // Reduced speed for subtle scrambling (15%)
+                    revealDelay: 0.85, // Reveal the actual word faster (85% of the duration will be the final text)
                 },
                 onUpdate: function () {
                     firstLine.innerHTML = firstLine.textContent + '<span class="cursor">_</span>';
                 },
                 onComplete: function () {
-                    setTimeout(eraseWord, 1500); // Pause before erasing the word
-                }
+                    setTimeout(eraseWord, 1500);
+                },
             });
         }
 
@@ -79,29 +83,31 @@ document.addEventListener('DOMContentLoaded', function () {
         typeNextWord();
     }
 
-    // Apply static typing effect for Line 2 and Line 3 with capital letters and ensure visibility
-    function applyStaticEffect(line, textContent, hideCursor = false) {
-        line.style.opacity = 1; // Make sure the line is visible
-        gsap.to(line, {
-            duration: 2, // Longer duration for smoother effect
-            scrambleText: {
-                text: textContent.toUpperCase(), // Convert static text to uppercase
-                chars: "ABCDEFGHIJKLMNOPQRSTUVWXYZ", // Use capital letters for the static text scramble
-                speed: 1, // Same speed for smoother effect
-                revealDelay: 0.1 // Small delay before revealing the final text
-            },
-            onUpdate: function () {
-                if (!hideCursor) {
-                    line.innerHTML = line.textContent + '<span class="cursor">_</span>';
-                }
-            },
-            onComplete: function () {
-                if (!hideCursor) {
-                    line.innerHTML = textContent.toUpperCase() + '<span class="cursor">_</span>';
-                } else {
-                    line.innerHTML = textContent.toUpperCase(); // No cursor for specific lines
-                }
-            }
+    // Apply static typing effect without cursor for specific lines
+    function applyStaticEffect(line, duration = 1.4, speed = 0.4, hideCursor = false) {
+        const originalText = line.textContent.replace('_', '');
+        applyBinaryEffect(line, function () {
+            gsap.to(line, {
+                duration: duration,
+                scrambleText: {
+                    text: originalText,
+                    chars: "01",
+                    speed: speed,
+                    revealDelay: 0.05,
+                },
+                onUpdate: function () {
+                    if (!hideCursor) {
+                        line.innerHTML = line.textContent + '<span class="cursor">_</span>';
+                    }
+                },
+                onComplete: function () {
+                    if (!hideCursor) {
+                        line.innerHTML = originalText + '<span class="cursor">_</span>';
+                    } else {
+                        line.innerHTML = originalText; // No cursor for specific lines
+                    }
+                },
+            });
         });
     }
 
@@ -114,8 +120,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (target === h1Wrapper) {
                         // Apply animations to H1 lines only when the full H1 wrapper is in view
                         applyBinaryEffect(firstLine, typeWords);
-                        applyStaticEffect(secondLine, "STRON INTERNETOWYCH", true); // No cursor for Line 2
-                        applyStaticEffect(thirdLine, "DLA TWOJEJ FIRMY"); // Static cursor for Line 3
+                        applyStaticEffect(secondLine, 1.4, 0.4, true); // No cursor for H1 line2
+                        applyStaticEffect(thirdLine);
                     }
                     observer.unobserve(target); // Stop observing after the animation is triggered
                 }

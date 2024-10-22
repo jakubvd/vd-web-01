@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     text: word,
                     chars: "01",
                     speed: 0.001,
-                    revealDelay: 0.1,
+                    revealDelay: 0.01,
                 },
                 onUpdate: function () {
                     firstLine.innerHTML = firstLine.textContent + '<span class="cursor">_</span>';

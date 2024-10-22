@@ -38,19 +38,33 @@ document.addEventListener('DOMContentLoaded', function () {
     function typeWords() {
         function typeNextWord() {
             let word = words[currentWord];
+            
+            // Scramble effect - shortened
             gsap.to(firstLine, {
-                duration: 4.0,
+                duration: 0.8, // Shorter scramble effect
                 scrambleText: {
                     text: word,
                     chars: "01",
-                    speed: 0.05,
-                    revealDelay: 0.001,
+                    speed: 0.25, // Faster scramble effect
+                    revealDelay: 0.01, // Fast reveal delay
                 },
                 onUpdate: function () {
                     firstLine.innerHTML = firstLine.textContent + '<span class="cursor">_</span>';
                 },
                 onComplete: function () {
-                    setTimeout(eraseWord, 2000);
+                    // Typing effect - slower and smoother
+                    gsap.to(firstLine, {
+                        duration: 2.0, // Smooth typing
+                        scrambleText: {
+                            text: word,
+                            chars: "", // No scramble for typing
+                            speed: 0.05, // Slow typing for smooth effect
+                            revealDelay: 0.05, // Smooth reveal
+                        },
+                        onComplete: function () {
+                            setTimeout(eraseWord, 2000);
+                        }
+                    });
                 },
             });
         }

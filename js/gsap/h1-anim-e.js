@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
         function typeNextWord() {
             let word = words[currentWord];
             gsap.to(firstLine, {
-                duration: 0.5,
+                duration: 4.0,
                 scrambleText: {
                     text: word,
                     chars: "01",

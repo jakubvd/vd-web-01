@@ -42,9 +42,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 duration: 2.0,
                 scrambleText: {
                     text: word,
-                    chars: "01",
+                    chars: "0", // Scrambling fewer characters (only '0')
                     speed: 0.01, // Further reduced speed for scramble
-                    revealDelay: 0.001, // Even faster reveal delay
+                    revealDelay: 0.001, // Faster reveal delay
                 },
                 onUpdate: function () {
                     firstLine.innerHTML = firstLine.textContent + '<span class="cursor">_</span>';
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 duration: duration,
                 scrambleText: {
                     text: originalText,
-                    chars: "01",
+                    chars: "0", // Scrambling fewer characters (only '0')
                     speed: speed, // Minimal scramble speed
                     revealDelay: 0.001, // Very quick reveal to reduce scrambling
                 },

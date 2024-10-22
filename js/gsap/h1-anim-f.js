@@ -6,24 +6,24 @@ document.addEventListener('DOMContentLoaded', function () {
     const firstLine = document.querySelector('.heading-style-h1-typed .line1'); // First line in h1
     const secondLine = document.querySelector('.heading-style-h1-typed .line2'); // Second line in h1
     const thirdLine = document.querySelector('.heading-style-h1-typed .line3'); // Third line in h1
-    const words = ['development', 'projektowanie', 'utrzymanie', 'outsourcing']; // Removed 'wdrożenia'
+    const words = ['Projektowanie', 'Development', 'Utrzymanie', 'Outsourcing']; // Removed 'Wdrożenia'
     let currentWord = 0;
 
-    // Apply initial "0101010101010101" binary scramble
+    // Apply binary effect and backspacing for all lines
     function applyBinaryEffect(line, callback) {
         gsap.to(line, {
-            duration: 0.8, // Short scramble duration
+            duration: 1.0, // Set the duration for the scramble effect
             scrambleText: {
                 text: "0101010101010101", // Static binary string (16 digits)
-                chars: "01",
-                speed: 0.05, // Smooth binary scramble
-                revealDelay: 0.02, // Fast reveal to minimize the scramble
+                chars: "01", // Scramble using only '0' and '1'
+                speed: 0.2, // Control how fast it scrambles
+                revealDelay: 0.05, // Delay before revealing the next character
             },
             onUpdate: function () {
-                line.innerHTML = line.textContent + '<span class="cursor">_</span>';
+                line.innerHTML = line.textContent + '<span class="cursor">_</span>'; // Add the cursor while scrambling
             },
             onComplete: function () {
-                setTimeout(callback, 500);
+                setTimeout(callback, 500); // Once done, proceed with the backspacing
             }
         });
     }
@@ -35,32 +35,32 @@ document.addEventListener('DOMContentLoaded', function () {
             if (charIndex > 0) {
                 line.textContent = line.textContent.slice(0, charIndex - 1) + '_';
                 charIndex--;
-                setTimeout(eraseChar, 40);
+                setTimeout(eraseChar, 25);
             } else {
                 line.textContent = '_';
-                setTimeout(callback, 400);
+                setTimeout(callback, 250);
             }
         }
         eraseChar();
     }
 
-    // GSAP ScrambleText for H1 line1 - Scramble lowercase letters during the typing effect
+    // GSAP ScrambleText for H1 line1
     function typeWords() {
         function typeNextWord() {
             let word = words[currentWord];
             gsap.to(firstLine, {
-                duration: 2.0, // Smooth typing duration
+                duration: 1.4,
                 scrambleText: {
                     text: word,
-                    chars: "abcdefghijklmnopqrstuvwxyz", // Lowercase letters scramble only
-                    speed: 0.3, // Smooth scrambling speed for letters
-                    revealDelay: 0.02, // Smooth transition
+                    chars: "01",
+                    speed: 0.4,
+                    revealDelay: 0.05,
                 },
                 onUpdate: function () {
                     firstLine.innerHTML = firstLine.textContent + '<span class="cursor">_</span>';
                 },
                 onComplete: function () {
-                    setTimeout(eraseWord, 2000);
+                    setTimeout(eraseWord, 1500);
                 },
             });
         }
@@ -72,10 +72,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (charIndex > 0) {
                     firstLine.innerHTML = word.slice(0, charIndex - 1) + '<span class="cursor">_</span>';
                     charIndex--;
-                    setTimeout(eraseChar, 35);
+                    setTimeout(eraseChar, 25);
                 } else {
                     currentWord = (currentWord + 1) % words.length;
-                    setTimeout(typeNextWord, 350);
+                    setTimeout(typeNextWord, 250);
                 }
             }
             eraseChar();
@@ -85,16 +85,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Apply static typing effect without cursor for specific lines
-    function applyStaticEffect(line, duration = 1.4, speed = 0.2, hideCursor = false) {
+    function applyStaticEffect(line, duration = 1.4, speed = 0.4, hideCursor = false) {
         const originalText = line.textContent.replace('_', '');
         applyBinaryEffect(line, function () {
             gsap.to(line, {
                 duration: duration,
                 scrambleText: {
                     text: originalText,
-                    chars: "abcdefghijklmnopqrstuvwxyz", // Lowercase letters scramble for static lines
+                    chars: "01",
                     speed: speed,
-                    revealDelay: 0.02,
+                    revealDelay: 0.05,
                 },
                 onUpdate: function () {
                     if (!hideCursor) {
@@ -119,10 +119,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (entry.isIntersecting) {
                     const target = entry.target;
                     if (target === h1Wrapper) {
-                        // Apply binary scramble first, then type letters scramble
+                        // Apply animations to H1 lines only when the full H1 wrapper is in view
                         applyBinaryEffect(firstLine, typeWords);
-                        applyStaticEffect(secondLine, 1.4, 0.2, true); // Scramble letters for line2
-                        applyStaticEffect(thirdLine, 1.4, 0.2); // Scramble letters for line3
+                        applyStaticEffect(secondLine, 1.4, 0.4, true); // No cursor for H1 line2
+                        applyStaticEffect(thirdLine);
                     }
                     observer.unobserve(target); // Stop observing after the animation is triggered
                 }

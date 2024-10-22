@@ -2,14 +2,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // Register GSAP ScrambleTextPlugin
     gsap.registerPlugin(ScrambleTextPlugin);
 
-    const h1Wrapper = document.querySelector('.h1-wrapper'); // H1 wrapper
     const firstLine = document.querySelector('.heading-style-h1-typed .line1'); // First line in h1
     const secondLine = document.querySelector('.heading-style-h1-typed .line2'); // Second line in h1
     const thirdLine = document.querySelector('.heading-style-h1-typed .line3'); // Third line in h1
-    const words = ['Projektowanie', 'Development', 'Utrzymanie', 'Outsourcing']; // Removed 'Wdrożenia'
-    let currentWord = 0;
 
-    // Apply binary effect and backspacing for all lines
+    // Apply binary effect and backspacing for first line
     function applyBinaryEffect(line, callback) {
         gsap.to(line, {
             duration: 1.0, // Set the duration for the scramble effect
@@ -20,10 +17,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 revealDelay: 0.05, // Delay before revealing the next character
             },
             onUpdate: function () {
-                line.innerHTML = line.textContent + '<span class="cursor">_</span>'; // Add the cursor while scrambling
+                line.innerHTML = line.textContent + '<span class="cursor">_</span>';
+                console.log("Current text: ", line.textContent); // Debug the text content
             },
             onComplete: function () {
-                setTimeout(callback, 500); // Once done, proceed with the backspacing
+                console.log("Binary effect complete.");
+                setTimeout(callback, 500); // Once done, proceed with the next effect
             }
         });
     }
@@ -46,13 +45,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // GSAP ScrambleText for H1 line1
     function typeWords() {
+        const words = ['projektowanie', 'development', 'utrzymanie', 'outsourcing']; // Lowercase words
+        let currentWord = 0;
+
         function typeNextWord() {
             let word = words[currentWord];
             gsap.to(firstLine, {
                 duration: 1.4,
                 scrambleText: {
                     text: word,
-                    chars: "01",
+                    chars: "abcdefghijklmnopqrstuvwxyz", // Scramble letters (lowercase)
                     speed: 0.4,
                     revealDelay: 0.05,
                 },
@@ -84,55 +86,9 @@ document.addEventListener('DOMContentLoaded', function () {
         typeNextWord();
     }
 
-    // Apply static typing effect without cursor for specific lines
-    function applyStaticEffect(line, duration = 1.4, speed = 0.4, hideCursor = false) {
-        const originalText = line.textContent.replace('_', '');
-        applyBinaryEffect(line, function () {
-            gsap.to(line, {
-                duration: duration,
-                scrambleText: {
-                    text: originalText,
-                    chars: "01",
-                    speed: speed,
-                    revealDelay: 0.05,
-                },
-                onUpdate: function () {
-                    if (!hideCursor) {
-                        line.innerHTML = line.textContent + '<span class="cursor">_</span>';
-                    }
-                },
-                onComplete: function () {
-                    if (!hideCursor) {
-                        line.innerHTML = originalText + '<span class="cursor">_</span>';
-                    } else {
-                        line.innerHTML = originalText; // No cursor for specific lines
-                    }
-                },
-            });
-        });
-    }
-
-    // Observer API to trigger animations when H1-wrapper enters the viewport
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    const target = entry.target;
-                    if (target === h1Wrapper) {
-                        // Apply animations to H1 lines only when the full H1 wrapper is in view
-                        applyBinaryEffect(firstLine, typeWords);
-                        applyStaticEffect(secondLine, 1.4, 0.4, true); // No cursor for H1 line2
-                        applyStaticEffect(thirdLine);
-                    }
-                    observer.unobserve(target); // Stop observing after the animation is triggered
-                }
-            });
-        },
-        {
-            threshold: 1.0, // 100% visibility for triggering
-        }
-    );
-
-    // Observe the entire H1 wrapper
-    observer.observe(h1Wrapper);
+    // Initial call for binary effect on firstLine
+    applyBinaryEffect(firstLine, function() {
+        // After binary scramble completes, start the word typing effect
+        typeWords();
+    });
 });

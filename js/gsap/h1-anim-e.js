@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const firstLine = document.querySelector('.heading-style-h1-typed .line1'); // First line in h1
     const secondLine = document.querySelector('.heading-style-h1-typed .line2'); // Second line in h1
     const thirdLine = document.querySelector('.heading-style-h1-typed .line3'); // Third line in h1
-    const words = ['Projektowanie', 'Development', 'Utrzymanie', 'Outsourcing']; // Removed 'Wdrożenia'
+    const words = ['Development', 'Projektowanie', 'Utrzymanie', 'Outsourcing']; // Removed 'Wdrożenia'
     let currentWord = 0;
 
     // Generates a binary string
@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (charIndex > 0) {
                 line.textContent = line.textContent.slice(0, charIndex - 1) + '_';
                 charIndex--;
-                setTimeout(eraseChar, 25);
+                setTimeout(eraseChar, 35);
             } else {
                 line.textContent = '_';
-                setTimeout(callback, 250);
+                setTimeout(callback, 350);
             }
         }
         eraseChar();

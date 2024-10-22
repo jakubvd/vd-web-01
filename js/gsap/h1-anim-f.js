@@ -6,16 +6,26 @@ document.addEventListener('DOMContentLoaded', function () {
     const firstLine = document.querySelector('.heading-style-h1-typed .line1'); // First line in h1
     const secondLine = document.querySelector('.heading-style-h1-typed .line2'); // Second line in h1
     const thirdLine = document.querySelector('.heading-style-h1-typed .line3'); // Third line in h1
-    const words = ['Development', 'Projektowanie', 'Utrzymanie', 'Outsourcing']; // Removed 'Wdrożenia'
+    const words = ['development', 'projektowanie', 'utrzymanie', 'outsourcing']; // Removed 'wdrożenia'
     let currentWord = 0;
 
-    // Apply static "0101010101010101" string for all lines
+    // Apply initial "0101010101010101" binary scramble
     function applyBinaryEffect(line, callback) {
-        line.textContent = "0101010101010101"; // Static binary string (16 digits)
-        line.classList.add('show');
-        setTimeout(function () {
-            backspace(line, callback);
-        }, 500);
+        gsap.to(line, {
+            duration: 0.8, // Short scramble duration
+            scrambleText: {
+                text: "0101010101010101", // Static binary string (16 digits)
+                chars: "01",
+                speed: 0.05, // Smooth binary scramble
+                revealDelay: 0.02, // Fast reveal to minimize the scramble
+            },
+            onUpdate: function () {
+                line.innerHTML = line.textContent + '<span class="cursor">_</span>';
+            },
+            onComplete: function () {
+                setTimeout(callback, 500);
+            }
+        });
     }
 
     // Backspace effect function
@@ -34,17 +44,17 @@ document.addEventListener('DOMContentLoaded', function () {
         eraseChar();
     }
 
-    // GSAP ScrambleText for H1 line1
+    // GSAP ScrambleText for H1 line1 - Scramble lowercase letters during the typing effect
     function typeWords() {
         function typeNextWord() {
             let word = words[currentWord];
             gsap.to(firstLine, {
-                duration: 2.0,
+                duration: 2.0, // Smooth typing duration
                 scrambleText: {
                     text: word,
-                    chars: "0", // Scrambling fewer characters (only '0')
-                    speed: 0.01, // Further reduced speed for scramble
-                    revealDelay: 0.001, // Faster reveal delay
+                    chars: "abcdefghijklmnopqrstuvwxyz", // Lowercase letters scramble only
+                    speed: 0.3, // Smooth scrambling speed for letters
+                    revealDelay: 0.02, // Smooth transition
                 },
                 onUpdate: function () {
                     firstLine.innerHTML = firstLine.textContent + '<span class="cursor">_</span>';
@@ -75,16 +85,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Apply static typing effect without cursor for specific lines
-    function applyStaticEffect(line, duration = 1.4, speed = 0.01, hideCursor = false) { // Same minimal scramble speed for consistency
+    function applyStaticEffect(line, duration = 1.4, speed = 0.2, hideCursor = false) {
         const originalText = line.textContent.replace('_', '');
         applyBinaryEffect(line, function () {
             gsap.to(line, {
                 duration: duration,
                 scrambleText: {
                     text: originalText,
-                    chars: "0", // Scrambling fewer characters (only '0')
-                    speed: speed, // Minimal scramble speed
-                    revealDelay: 0.001, // Very quick reveal to reduce scrambling
+                    chars: "abcdefghijklmnopqrstuvwxyz", // Lowercase letters scramble for static lines
+                    speed: speed,
+                    revealDelay: 0.02,
                 },
                 onUpdate: function () {
                     if (!hideCursor) {
@@ -109,10 +119,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (entry.isIntersecting) {
                     const target = entry.target;
                     if (target === h1Wrapper) {
-                        // Apply animations to H1 lines only when the full H1 wrapper is in view
+                        // Apply binary scramble first, then type letters scramble
                         applyBinaryEffect(firstLine, typeWords);
-                        applyStaticEffect(secondLine, 1.4, 0.01, true); // Apply same minimal scramble effect to line2
-                        applyStaticEffect(thirdLine, 1.4, 0.01); // Apply same minimal scramble effect to line3
+                        applyStaticEffect(secondLine, 1.4, 0.2, true); // Scramble letters for line2
+                        applyStaticEffect(thirdLine, 1.4, 0.2); // Scramble letters for line3
                     }
                     observer.unobserve(target); // Stop observing after the animation is triggered
                 }

@@ -9,18 +9,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const words = ['Projektowanie', 'Development', 'Utrzymanie', 'Outsourcing']; // Removed 'Wdrożenia'
     let currentWord = 0;
 
-    // Generates a binary string
-    function generateShuffledBinaryString(length) {
-        let result = '';
-        for (let i = 0; i < length; i++) {
-            result += Math.random() > 0.5 ? '1' : '0';
-        }
-        return result;
-    }
-
-    // Apply binary effect and backspacing for all lines
+    // Apply static "0101010101010101" string for all lines
     function applyBinaryEffect(line, callback) {
-        line.textContent = generateShuffledBinaryString(15);
+        line.textContent = "0101010101010101"; // Static binary string (16 digits)
         line.classList.add('show');
         setTimeout(function () {
             backspace(line, callback);

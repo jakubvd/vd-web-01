@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', function () {
         revealDelay: 0.2 // Small delay before revealing the final word
     };
 
-    // Apply even "010101..." binary string for initial effect
+    // Apply even "010101..." binary string for initial effect and ensure visibility
     function applyBinaryEffect(line, callback) {
         line.textContent = "010101010101010"; // Static, even-length binary string for visual symmetry
-        line.classList.add('show');
+        line.style.opacity = 1; // Make sure the line is visible
         setTimeout(function () {
             backspace(line, callback);
         }, 500);
@@ -79,8 +79,9 @@ document.addEventListener('DOMContentLoaded', function () {
         typeNextWord();
     }
 
-    // Apply static typing effect for Line 2 and Line 3 with capital letters
+    // Apply static typing effect for Line 2 and Line 3 with capital letters and ensure visibility
     function applyStaticEffect(line, textContent, hideCursor = false) {
+        line.style.opacity = 1; // Make sure the line is visible
         gsap.to(line, {
             duration: 2, // Longer duration for smoother effect
             scrambleText: {

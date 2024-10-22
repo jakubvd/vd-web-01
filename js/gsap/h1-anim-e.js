@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const firstLine = document.querySelector('.heading-style-h1-typed .line1'); // First line in h1
     const secondLine = document.querySelector('.heading-style-h1-typed .line2'); // Second line in h1
     const thirdLine = document.querySelector('.heading-style-h1-typed .line3'); // Third line in h1
-    const words = ['Development', 'Projektowanie', 'Utrzymanie', 'Outsourcing']; // Removed 'Wdrożenia'
+    const words = ['Development', 'Projektowanie', 'Utrzymanie', 'Outsourcing']; // Keep original case and words
     let currentWord = 0;
 
     // Apply static "0101010101010101" string for all lines
@@ -39,12 +39,12 @@ document.addEventListener('DOMContentLoaded', function () {
         function typeNextWord() {
             let word = words[currentWord];
             
-            // Scramble effect - shortened
+            // Scramble effect - using '01' only
             gsap.to(firstLine, {
                 duration: 0.8, // Shorter scramble effect
                 scrambleText: {
                     text: word,
-                    chars: "01",
+                    chars: "01", // Only scramble '01'
                     speed: 0.25, // Faster scramble effect
                     revealDelay: 0.01, // Fast reveal delay
                 },
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     gsap.to(firstLine, {
                         duration: 2.0, // Smooth typing
                         scrambleText: {
-                            text: word,
+                            text: word, // Keep original word case
                             chars: "", // No scramble for typing
                             speed: 0.05, // Slow typing for smooth effect
                             revealDelay: 0.05, // Smooth reveal
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 duration: duration,
                 scrambleText: {
                     text: originalText,
-                    chars: "01",
+                    chars: "01", // Only scramble '01' for other lines as well
                     speed: speed,
                     revealDelay: 0.35,
                 },

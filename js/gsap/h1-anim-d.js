@@ -34,32 +34,32 @@ document.addEventListener('DOMContentLoaded', function () {
             if (charIndex > 0) {
                 line.textContent = line.textContent.slice(0, charIndex - 1) + '_';
                 charIndex--;
-                setTimeout(eraseChar, 20); // Speed up backspacing for smoothness
+                setTimeout(eraseChar, 25);
             } else {
                 line.textContent = '_';
-                setTimeout(callback, 200); // Shorter pause before next effect
+                setTimeout(callback, 250);
             }
         }
         eraseChar();
     }
 
-    // GSAP ScrambleText for H1 line1, smooth typing and subtle scrambling
+    // GSAP ScrambleText for H1 line1
     function typeWords() {
         function typeNextWord() {
             let word = words[currentWord];
             gsap.to(firstLine, {
-                duration: 1.0, // Shorter duration for typing to match other lines
+                duration: 1.4,
                 scrambleText: {
                     text: word,
                     chars: "01",
-                    speed: 0.15, // Subtle scramble
-                    revealDelay: 0.85, // Reveal most of the word smoothly
+                    speed: 0.4,
+                    revealDelay: 0.05,
                 },
                 onUpdate: function () {
                     firstLine.innerHTML = firstLine.textContent + '<span class="cursor">_</span>';
                 },
                 onComplete: function () {
-                    setTimeout(eraseWord, 1000); // Shorter delay before erasing
+                    setTimeout(eraseWord, 1500);
                 },
             });
         }
@@ -71,10 +71,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (charIndex > 0) {
                     firstLine.innerHTML = word.slice(0, charIndex - 1) + '<span class="cursor">_</span>';
                     charIndex--;
-                    setTimeout(eraseChar, 20); // Speed up backspacing for consistency
+                    setTimeout(eraseChar, 25);
                 } else {
                     currentWord = (currentWord + 1) % words.length;
-                    setTimeout(typeNextWord, 200); // Quick transition to next word
+                    setTimeout(typeNextWord, 250);
                 }
             }
             eraseChar();
@@ -83,28 +83,31 @@ document.addEventListener('DOMContentLoaded', function () {
         typeNextWord();
     }
 
-    // Apply static typing effect for Line 2 and Line 3 without scramble
-    function applyStaticEffect(line, textContent, hideCursor = false) {
-        gsap.to(line, {
-            duration: 1.0, // Ensure typing duration matches Line 1
-            scrambleText: {
-                text: textContent, // Static text for these lines
-                chars: "01", // Binary character consistency
-                speed: 0.15, // Smooth speed like Line 1
-                revealDelay: 0.85, // Make sure it reveals quickly for smoothness
-            },
-            onUpdate: function () {
-                if (!hideCursor) {
-                    line.innerHTML = line.textContent + '<span class="cursor">_</span>';
-                }
-            },
-            onComplete: function () {
-                if (!hideCursor) {
-                    line.innerHTML = textContent + '<span class="cursor">_</span>';
-                } else {
-                    line.innerHTML = textContent; // No cursor for specific lines
-                }
-            }
+    // Apply static typing effect without cursor for specific lines
+    function applyStaticEffect(line, duration = 1.4, speed = 0.4, hideCursor = false) {
+        const originalText = line.textContent.replace('_', '');
+        applyBinaryEffect(line, function () {
+            gsap.to(line, {
+                duration: duration,
+                scrambleText: {
+                    text: originalText,
+                    chars: "01",
+                    speed: speed,
+                    revealDelay: 0.05,
+                },
+                onUpdate: function () {
+                    if (!hideCursor) {
+                        line.innerHTML = line.textContent + '<span class="cursor">_</span>';
+                    }
+                },
+                onComplete: function () {
+                    if (!hideCursor) {
+                        line.innerHTML = originalText + '<span class="cursor">_</span>';
+                    } else {
+                        line.innerHTML = originalText; // No cursor for specific lines
+                    }
+                },
+            });
         });
     }
 
@@ -117,8 +120,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (target === h1Wrapper) {
                         // Apply animations to H1 lines only when the full H1 wrapper is in view
                         applyBinaryEffect(firstLine, typeWords);
-                        applyStaticEffect(secondLine, "Stron Internetowych", true); // No cursor for Line 2
-                        applyStaticEffect(thirdLine, "dla Twojej Firmy"); // Static cursor for Line 3
+                        applyStaticEffect(secondLine, 1.4, 0.4, true); // No cursor for H1 line2
+                        applyStaticEffect(thirdLine);
                     }
                     observer.unobserve(target); // Stop observing after the animation is triggered
                 }

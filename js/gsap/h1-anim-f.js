@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (charIndex > 0) {
                 line.textContent = line.textContent.slice(0, charIndex - 1) + '_';
                 charIndex--;
-                setTimeout(eraseChar, 25);
+                setTimeout(eraseChar, 32);
             } else {
                 line.textContent = '_';
-                setTimeout(callback, 250);
+                setTimeout(callback, 240);
             }
         }
         eraseChar();
@@ -51,15 +51,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 duration: 1.4,
                 scrambleText: {
                     text: word,
-                    chars: "01",
+                    chars: "lowerCase",
                     speed: 0.4,
-                    revealDelay: 0.05,
+                    revealDelay: 0.04,
                 },
                 onUpdate: function () {
                     firstLine.innerHTML = firstLine.textContent + '<span class="cursor">_</span>';
                 },
                 onComplete: function () {
-                    setTimeout(eraseWord, 1500);
+                    setTimeout(eraseWord, 2000);
                 },
             });
         }
@@ -71,10 +71,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (charIndex > 0) {
                     firstLine.innerHTML = word.slice(0, charIndex - 1) + '<span class="cursor">_</span>';
                     charIndex--;
-                    setTimeout(eraseChar, 25);
+                    setTimeout(eraseChar, 32);
                 } else {
                     currentWord = (currentWord + 1) % words.length;
-                    setTimeout(typeNextWord, 250);
+                    setTimeout(typeNextWord, 240);
                 }
             }
             eraseChar();
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     text: originalText,
                     chars: "01",
                     speed: speed,
-                    revealDelay: 0.05,
+                    revealDelay: 0.04,
                 },
                 onUpdate: function () {
                     if (!hideCursor) {

@@ -48,11 +48,11 @@ document.addEventListener('DOMContentLoaded', function () {
         function typeNextWord() {
             let word = words[currentWord];
             gsap.to(firstLine, {
-                duration: 1.8,
+                duration: 1.6,
                 scrambleText: {
                     text: word,
                     chars: "01",
-                    speed: 0.04,
+                    speed: 0.2,
                     revealDelay: 0.01,
                 },
                 ease: "linear", // Easing applied for a smoother effect
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Apply static typing effect without cursor for specific lines
-    function applyStaticEffect(line, duration = 1.8, speed = 0.04, hideCursor = false) {
+    function applyStaticEffect(line, duration = 1.6, speed = 0.2, hideCursor = false) {
         const originalText = line.textContent.replace('_', '');
         applyBinaryEffect(line, function () {
             gsap.to(line, {
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (target === h1Wrapper) {
                         // Apply animations to H1 lines only when the full H1 wrapper is in view
                         applyBinaryEffect(firstLine, typeWords);
-                        applyStaticEffect(secondLine, 1.8, 0.04, true); // No cursor for H1 line2
+                        applyStaticEffect(secondLine, 1.6, 0.2, true); // No cursor for H1 line2
                         applyStaticEffect(thirdLine);
                     }
                     observer.unobserve(target); // Stop observing after the animation is triggered

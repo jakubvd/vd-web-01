@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (charIndex > 0) {
                 line.textContent = line.textContent.slice(0, charIndex - 1) + '_';
                 charIndex--;
-                setTimeout(eraseChar, 40);
+                setTimeout(eraseChar, 60);
             } else {
                 line.textContent = '_';
-                setTimeout(callback, 250);
+                setTimeout(callback, 300);
             }
         }
         eraseChar();

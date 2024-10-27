@@ -72,10 +72,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (charIndex > 0) {
                     firstLine.innerHTML = word.slice(0, charIndex - 1) + '<span class="cursor">_</span>';
                     charIndex--;
-                    setTimeout(eraseChar, 25);
+                    setTimeout(eraseChar, 60);
                 } else {
                     currentWord = (currentWord + 1) % words.length;
-                    setTimeout(typeNextWord, 250);
+                    setTimeout(typeNextWord, 300);
                 }
             }
             eraseChar();
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Apply static typing effect without cursor for specific lines
-    function applyStaticEffect(line, duration = 1.4, speed = 0.4, hideCursor = false) {
+    function applyStaticEffect(line, duration = 1.8, speed = 0.04, hideCursor = false) {
         const originalText = line.textContent.replace('_', '');
         applyBinaryEffect(line, function () {
             gsap.to(line, {
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     text: originalText,
                     chars: "01",
                     speed: speed,
-                    revealDelay: 0.05,
+                    revealDelay: 0.01,
                 },
                 onUpdate: function () {
                     if (!hideCursor) {
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (target === h1Wrapper) {
                         // Apply animations to H1 lines only when the full H1 wrapper is in view
                         applyBinaryEffect(firstLine, typeWords);
-                        applyStaticEffect(secondLine, 1.4, 0.4, true); // No cursor for H1 line2
+                        applyStaticEffect(secondLine, 1.8, 0.04, true); // No cursor for H1 line2
                         applyStaticEffect(thirdLine);
                     }
                     observer.unobserve(target); // Stop observing after the animation is triggered

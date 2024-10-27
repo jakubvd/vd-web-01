@@ -48,16 +48,16 @@ document.addEventListener('DOMContentLoaded', function () {
         function typeNextWord() {
             let word = words[currentWord];
             gsap.to(firstLine, {
-                duration: 1.8,
+                duration: 1.4,
                 scrambleText: {
                     text: word,
                     chars: "01",
-                    speed: 0.4,
+                    speed: 0.2,
                     revealDelay: 0.02,
                 },
                 ease: "power2.out", // Easing applied for a smoother effect
                 onUpdate: function () {
-                    firstLine.innerHTML = firstLine.textContent + '<span class="cursor">|</span>';
+                    firstLine.innerHTML = firstLine.textContent + '<span class="cursor">_</span>';
                 },
                 onComplete: function () {
                     setTimeout(eraseWord, 2000);
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Apply static typing effect without cursor for specific lines
-    function applyStaticEffect(line, duration = 1.8, speed = 0.1, hideCursor = false) {
+    function applyStaticEffect(line, duration = 1.4, speed = 0.2, hideCursor = false) {
         const originalText = line.textContent.replace('_', '');
         applyBinaryEffect(line, function () {
             gsap.to(line, {
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     text: originalText,
                     chars: "01",
                     speed: speed,
-                    revealDelay: 0.01,
+                    revealDelay: 0.02,
                 },
                 onUpdate: function () {
                     if (!hideCursor) {
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (target === h1Wrapper) {
                         // Apply animations to H1 lines only when the full H1 wrapper is in view
                         applyBinaryEffect(firstLine, typeWords);
-                        applyStaticEffect(secondLine, 1.8, 0.1, true); // No cursor for H1 line2
+                        applyStaticEffect(secondLine, 1.4, 0.2, true); // No cursor for H1 line2
                         applyStaticEffect(thirdLine);
                     }
                     observer.unobserve(target); // Stop observing after the animation is triggered

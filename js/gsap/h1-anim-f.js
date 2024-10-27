@@ -52,8 +52,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 scrambleText: {
                     text: word,
                     chars: "01",
-                    speed: 1.0,
-                    revealDelay: 1.00,
+                    speed: 0.2,
+                    revealDelay: 0.00,
                 },
                 onUpdate: function () {
                     firstLine.innerHTML = firstLine.textContent + '<span class="cursor">_</span>';

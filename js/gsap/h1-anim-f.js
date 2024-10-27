@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (charIndex > 0) {
                 line.textContent = line.textContent.slice(0, charIndex - 1) + '_';
                 charIndex--;
-                setTimeout(eraseChar, 32);
+                setTimeout(eraseChar, 40);
             } else {
                 line.textContent = '_';
-                setTimeout(callback, 240);
+                setTimeout(callback, 250);
             }
         }
         eraseChar();
@@ -48,12 +48,12 @@ document.addEventListener('DOMContentLoaded', function () {
         function typeNextWord() {
             let word = words[currentWord];
             gsap.to(firstLine, {
-                duration: 1.4,
+                duration: 2.0,
                 scrambleText: {
                     text: word,
-                    chars: "lowerCase",
-                    speed: 0.4,
-                    revealDelay: 0.04,
+                    chars: "01",
+                    speed: 1.0,
+                    revealDelay: 1.00,
                 },
                 onUpdate: function () {
                     firstLine.innerHTML = firstLine.textContent + '<span class="cursor">_</span>';
@@ -71,10 +71,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (charIndex > 0) {
                     firstLine.innerHTML = word.slice(0, charIndex - 1) + '<span class="cursor">_</span>';
                     charIndex--;
-                    setTimeout(eraseChar, 32);
+                    setTimeout(eraseChar, 25);
                 } else {
                     currentWord = (currentWord + 1) % words.length;
-                    setTimeout(typeNextWord, 240);
+                    setTimeout(typeNextWord, 250);
                 }
             }
             eraseChar();
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     text: originalText,
                     chars: "01",
                     speed: speed,
-                    revealDelay: 0.04,
+                    revealDelay: 0.05,
                 },
                 onUpdate: function () {
                     if (!hideCursor) {

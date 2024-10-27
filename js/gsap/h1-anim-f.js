@@ -52,10 +52,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 scrambleText: {
                     text: word,
                     chars: "01",
-                    speed: 0.2,
-                    revealDelay: 0.01,
+                    speed: 0.4,
+                    revealDelay: 0.02,
                 },
-                ease: "linear", // Easing applied for a smoother effect
+                ease: "power2.out", // Easing applied for a smoother effect
                 onUpdate: function () {
                     firstLine.innerHTML = firstLine.textContent + '<span class="cursor">_</span>';
                 },

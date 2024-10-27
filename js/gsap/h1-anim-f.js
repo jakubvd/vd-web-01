@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
         line.classList.add('show');
         setTimeout(function () {
             backspace(line, callback);
-        }, 600);
+        }, 500);
     }
 
     // Backspace effect function
@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (charIndex > 0) {
                 line.textContent = line.textContent.slice(0, charIndex - 1) + '_';
                 charIndex--;
-                setTimeout(eraseChar, 60);
+                setTimeout(eraseChar, 50);
             } else {
                 line.textContent = '_';
-                setTimeout(callback, 300);
+                setTimeout(callback, 250);
             }
         }
         eraseChar();
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
         function typeNextWord() {
             let word = words[currentWord];
             gsap.to(firstLine, {
-                duration: 1.6,
+                duration: 1.8,
                 scrambleText: {
                     text: word,
                     chars: "01",
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 ease: "power2.out", // Easing applied for a smoother effect
                 onUpdate: function () {
-                    firstLine.innerHTML = firstLine.textContent + '<span class="cursor">_</span>';
+                    firstLine.innerHTML = firstLine.textContent + '<span class="cursor">|</span>';
                 },
                 onComplete: function () {
                     setTimeout(eraseWord, 2000);
@@ -72,10 +72,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (charIndex > 0) {
                     firstLine.innerHTML = word.slice(0, charIndex - 1) + '<span class="cursor">_</span>';
                     charIndex--;
-                    setTimeout(eraseChar, 60);
+                    setTimeout(eraseChar, 50);
                 } else {
                     currentWord = (currentWord + 1) % words.length;
-                    setTimeout(typeNextWord, 300);
+                    setTimeout(typeNextWord, 250);
                 }
             }
             eraseChar();

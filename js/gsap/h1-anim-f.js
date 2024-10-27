@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const firstLine = document.querySelector('.heading-style-h1-typed .line1'); // First line in h1
     const secondLine = document.querySelector('.heading-style-h1-typed .line2'); // Second line in h1
     const thirdLine = document.querySelector('.heading-style-h1-typed .line3'); // Third line in h1
-    const words = ['Projektowanie', 'Development', 'Utrzymanie', 'Outsourcing']; // Removed 'Wdrożenia'
+    const words = ['Development', 'Projektowanie', 'Utrzymanie', 'Outsourcing']; // Removed 'Wdrożenia' 
     let currentWord = 0;
 
     // Generates a binary string
@@ -20,11 +20,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Apply binary effect and backspacing for all lines
     function applyBinaryEffect(line, callback) {
-        line.textContent = generateShuffledBinaryString(15);
+        line.textContent = generateShuffledBinaryString(13);
         line.classList.add('show');
         setTimeout(function () {
             backspace(line, callback);
-        }, 500);
+        }, 600);
     }
 
     // Backspace effect function

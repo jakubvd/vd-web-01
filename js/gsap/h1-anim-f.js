@@ -6,26 +6,25 @@ document.addEventListener('DOMContentLoaded', function () {
     const firstLine = document.querySelector('.heading-style-h1-typed .line1'); // First line in h1
     const secondLine = document.querySelector('.heading-style-h1-typed .line2'); // Second line in h1
     const thirdLine = document.querySelector('.heading-style-h1-typed .line3'); // Third line in h1
-    const words = ['projektowanie', 'development', 'utrzymanie', 'outsourcing']; // Removed 'Wdrożenia'
+    const words = ['Projektowanie', 'Development', 'Utrzymanie', 'Outsourcing']; // Removed 'Wdrożenia'
     let currentWord = 0;
 
-    // Apply binary effect (using "01") only during initial load, then call the callback
+    // Generates a binary string
+    function generateShuffledBinaryString(length) {
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += Math.random() > 0.5 ? '1' : '0';
+        }
+        return result;
+    }
+
+    // Apply binary effect and backspacing for all lines
     function applyBinaryEffect(line, callback) {
-        gsap.to(line, {
-            duration: 1.0,
-            scrambleText: {
-                text: "0101010101010101", // Static binary string (16 digits)
-                chars: "01", // Binary scramble
-                speed: 0.2,
-                revealDelay: 0.05,
-            },
-            onUpdate: function () {
-                line.innerHTML = line.textContent + '<span class="cursor">_</span>';
-            },
-            onComplete: function () {
-                setTimeout(callback, 500); // Proceed to backspace and type words
-            }
-        });
+        line.textContent = generateShuffledBinaryString(15);
+        line.classList.add('show');
+        setTimeout(function () {
+            backspace(line, callback);
+        }, 500);
     }
 
     // Backspace effect function
@@ -44,17 +43,17 @@ document.addEventListener('DOMContentLoaded', function () {
         eraseChar();
     }
 
-    // Typing function for H1 line1 with letter scrambling
+    // GSAP ScrambleText for H1 line1
     function typeWords() {
         function typeNextWord() {
             let word = words[currentWord];
             gsap.to(firstLine, {
-                duration: 1.4,
+                duration: 2.0,
                 scrambleText: {
                     text: word,
-                    chars: "abcdefghijklmnopqrstuvwxyz", // Use letters for scrambling
-                    speed: 0.4,
-                    revealDelay: 0.05,
+                    chars: "abcdefghkmnoprstuwvxyz",
+                    speed: 0.2,
+                    revealDelay: 0.2,
                 },
                 onUpdate: function () {
                     firstLine.innerHTML = firstLine.textContent + '<span class="cursor">_</span>';
@@ -84,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
         typeNextWord();
     }
 
-    // Apply static typing effect with letters for specific lines
+    // Apply static typing effect without cursor for specific lines
     function applyStaticEffect(line, duration = 1.4, speed = 0.4, hideCursor = false) {
         const originalText = line.textContent.replace('_', '');
         applyBinaryEffect(line, function () {
@@ -92,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 duration: duration,
                 scrambleText: {
                     text: originalText,
-                    chars: "abcdefghijklmnopqrstuvwxyz", // Use letters after initial binary effect
+                    chars: "01",
                     speed: speed,
                     revealDelay: 0.05,
                 },

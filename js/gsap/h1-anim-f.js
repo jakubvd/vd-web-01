@@ -48,12 +48,12 @@ document.addEventListener('DOMContentLoaded', function () {
         function typeNextWord() {
             let word = words[currentWord];
             gsap.to(firstLine, {
-                duration: 2.0,
+                duration: 1.4,
                 scrambleText: {
                     text: word,
-                    chars: "abcdefghkmnoprstuwvxyz",
-                    speed: 0.2,
-                    revealDelay: 0.2,
+                    chars: "01",
+                    speed: 0.4,
+                    revealDelay: 0.05,
                 },
                 onUpdate: function () {
                     firstLine.innerHTML = firstLine.textContent + '<span class="cursor">_</span>';

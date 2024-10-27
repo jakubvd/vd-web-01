@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Backspace effect for each line
     function backspaceLine(line, callback) {
         gsap.to(line, {
-            duration: 1.5,
+            duration: 0.4,
             text: { value: "" }, // Erase the text
             ease: "power1.out",
             onComplete: callback // Trigger the next step after erasing
@@ -39,11 +39,11 @@ document.addEventListener('DOMContentLoaded', function () {
         function typeNextWord() {
             let word = words[currentWord]; // Get the current word
             gsap.to(firstLine, {
-                duration: 1.4,
+                duration: 1.0,
                 text: { value: word }, // Type the word
                 ease: "power2.inOut",
                 onComplete: function () {
-                    setTimeout(eraseWord, 1500); // Pause before erasing
+                    setTimeout(eraseWord, 2000); // Pause before erasing
                 }
             });
         }
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Erase the word and move to the next
         function eraseWord() {
             gsap.to(firstLine, {
-                duration: 1.5,
+                duration: 0.5,
                 text: { value: "" }, // Erase the current word
                 ease: "power1.out",
                 onComplete: function () {
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Typing effect for Line 2 and Line 3 (only once)
     function typeStaticLine(line, text, hasStaticCursor = false) {
         gsap.to(line, {
-            duration: 1.5,
+            duration: 0.5,
             text: { value: text },
             ease: "power2.out",
             onComplete: function () {
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
             backspaceLine(thirdLine, function () {
                 typeStaticLine(thirdLine, "dla Twojej Firmy", true); // Type Line 3 (once, with static cursor)
             });
-        }, 2000); // 2 second delay after showing the binary
+        }, 500); // 2 second delay after showing the binary
     }
 
     // Observer to trigger animations when H1-wrapper is visible

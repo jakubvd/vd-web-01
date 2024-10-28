@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
             ScrollSmoother.create({
                 wrapper: '#smooth-wrapper',   // Outer wrapper
                 content: '#main-wrapper',     // Inner content container
-                smooth: 1.2,                  // Smoothness
+                smooth: 0.8,                  // Smoothness
                 effects: true,                // Parallax effects enabled
             });
         }

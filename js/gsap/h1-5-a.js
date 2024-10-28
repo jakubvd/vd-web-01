@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function applyBinaryEffect(line, callback) {
         line.style.textAlign = 'left'; // Temporarily align text to the left
-        line.textContent = "0101010101_"; // Set static 10-digit binary text with underscore
+        line.textContent = "010101010101010101_"; // Set static 10-digit binary text with underscore
         line.classList.add('show');
         setTimeout(function () {
             backspace(line, callback);
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function backspace(line, callback) {
-        let charIndex = 10; // Start erasing from the end of "0101010101_"
+        let charIndex = 18; // Start erasing from the end of "0101010101_"
         function eraseChar() {
             if (charIndex > 0) {
                 line.textContent = line.textContent.slice(0, charIndex - 1) + '_';
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 line.textContent = '_';
                 line.style.textAlign = ''; // Reset text alignment after backspacing completes
-                setTimeout(callback, 200);
+                setTimeout(callback, 250);
             }
         }
         eraseChar();
@@ -38,9 +38,9 @@ document.addEventListener('DOMContentLoaded', function () {
         function typeNextWord() {
             let word = words[currentWord];
             gsap.to(firstLine, {
-                duration: 2.5,
+                duration: 2.2,
                 text: word, // Use TextPlugin for smooth typing
-                ease: "power3.out",
+                ease: "power2.out",
                 onUpdate: function () {
                     firstLine.innerHTML = firstLine.textContent + '<span class="cursor">_</span>';
                 },
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     setTimeout(eraseChar, 30);
                 } else {
                     currentWord = (currentWord + 1) % words.length;
-                    setTimeout(typeNextWord, 200);
+                    setTimeout(typeNextWord, 250);
                 }
             }
             eraseChar();
@@ -69,14 +69,14 @@ document.addEventListener('DOMContentLoaded', function () {
         typeNextWord();
     }
 
-    function applyStaticEffect(line, duration = 2.5, hideCursor = false) {
+    function applyStaticEffect(line, duration = 2.2, hideCursor = false) {
         const originalText = line.textContent.replace('_', '');
 
         applyBinaryEffect(line, function () {
             gsap.to(line, {
                 duration: duration,
                 text: originalText,  // Using TextPlugin for smooth typing
-                ease: "power3.out",
+                ease: "power2.out",
                 onUpdate: function () {
                     if (!hideCursor) {
                         line.innerHTML = line.textContent + '<span class="cursor">_</span>';
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (target === h1Wrapper) {
                         // Apply animations to H1 lines only when the full H1 wrapper is in view
                         applyBinaryEffect(firstLine, typeWords);
-                        applyStaticEffect(secondLine, 2.5, true); // No cursor for H1 line2
+                        applyStaticEffect(secondLine, 2.2, true); // No cursor for H1 line2
                         applyStaticEffect(thirdLine);
                     }
                     observer.unobserve(target); // Stop observing after the animation is triggered

@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function adjustAnimationSettings(e) {
         if (e.matches) {
             // Smaller viewport settings
-            duration = 1.0;
-            speed = 0.5;
+            duration = 1.5;
+            speed = 0.4;
         } else {
             // Default settings for larger viewports
             duration = 2.0;
@@ -58,10 +58,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (charIndex > 0) {
                 line.textContent = line.textContent.slice(0, charIndex - 1) + '_';
                 charIndex--;
-                setTimeout(eraseChar, 150); // Slow down for smoother backspace effect
+                setTimeout(eraseChar, 100); // Slow down for smoother backspace effect
             } else {
                 line.textContent = '_'; // Keep the underscore visible after backspace
-                setTimeout(callback, 250); // Small delay before starting the typing effect
+                setTimeout(callback, 200); // Small delay before starting the typing effect
             }
         }
         eraseChar();

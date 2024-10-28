@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
         applyBinaryEffect(line, function () {
             gsap.to(line, {
                 duration: duration,
-                ease: "sine.inOut",
+                ease: "power3.out",
                 scrambleText: {
                     text: originalText,
                     chars: "01",

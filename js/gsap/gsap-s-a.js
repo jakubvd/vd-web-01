@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ScrollSmoother.create({
         wrapper: '#smooth-wrapper',  // Outer wrapper
         content: '#main-wrapper',    // Inner content container
-        smooth: 1.5,                 // Controls smoothness of the scroll
+        smooth: 1.2,                 // Controls smoothness of the scroll
         effects: true,               // Enables optional parallax effects
     });
 });

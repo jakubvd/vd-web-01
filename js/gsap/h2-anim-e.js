@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         eraseChar();
     }
 
-    function applyStaticEffect(line, duration = 1.8, speed = 0.1) {
+    function applyStaticEffect(line, duration = 2.0, speed = 0.1) {
         const originalText = line.textContent.replace('_', '');
 
         applyBinaryEffect(line, function () {

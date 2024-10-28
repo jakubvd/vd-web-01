@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 void main() {
                     vec2 uv = vUv * 2.0;
                     float n = random(uv);
-                    gl_FragColor = vec4(vec3(1.15 - n), 0.05); // Adjusted for ~10% more brightness
+                    gl_FragColor = vec4(vec3(1.15 - n), 0.05);
                 }
             `;
 
@@ -66,4 +66,37 @@ document.addEventListener("DOMContentLoaded", function () {
                 requestAnimationFrame(animate);
             }
 
-            ani
+            animate();
+        });
+    }
+
+    function cleanupWebGLBackground() {
+        const containers = document.querySelectorAll('.webgl-bg');
+        containers.forEach(container => {
+            // Stop observing for container resizing
+            if (resizeObserver) {
+                resizeObserver.unobserve(container);
+            }
+            // Remove WebGL renderer if it exists
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+        });
+    }
+
+    function handleMediaQueryChange(e) {
+        if (e.matches) {
+            initializeWebGLBackground();
+        } else {
+            cleanupWebGLBackground();
+        }
+    }
+
+    // Initial check to see if we should load the background
+    if (mediaQuery.matches) {
+        initializeWebGLBackground();
+    }
+
+    // Listen for changes in viewport width
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+});

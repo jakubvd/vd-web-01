@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function adjustAnimationSettings(e) {
         if (e.matches) {
             // Smaller viewport settings
-            duration = 1.5;
-            speed = 0.4;
+            duration = 2.5;
+            speed = 0.2;
         } else {
             // Default settings for larger viewports
             duration = 2.0;

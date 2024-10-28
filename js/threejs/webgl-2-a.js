@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 void main() {
                     vec2 uv = vUv * 2.0;
                     float n = random(uv);
-                    gl_FragColor = vec4(vec3(1.20 - n), 0.07); // Adjusted for ~10% more brightness
+                    gl_FragColor = vec4(vec3(1.15 - n), 0.05); // Adjusted for ~10% more brightness
                 }
             `;
 
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
             scene.add(plane);
 
             function animate() {
-                shaderMaterial.uniforms.time.value += 0.001;
+                shaderMaterial.uniforms.time.value += 0.05;
                 renderer.render(scene, camera);
                 requestAnimationFrame(animate);
             }

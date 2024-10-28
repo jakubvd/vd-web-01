@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentWord = 0;
 
     function applyBinaryEffect(line, callback) {
+        line.style.textAlign = 'left'; // Temporarily align text to the left
         line.textContent = "0101010101_"; // Set static 10-digit binary text with underscore
         line.classList.add('show');
         setTimeout(function () {
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 setTimeout(eraseChar, 30);
             } else {
                 line.textContent = '_';
+                line.style.textAlign = ''; // Reset text alignment after backspacing completes
                 setTimeout(callback, 200);
             }
         }

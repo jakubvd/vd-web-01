@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Apply binary effect and backspacing for all lines
     function applyBinaryEffect(line, callback) {
-        line.textContent = generateShuffledBinaryString(15);
+        line.textContent = generateShuffledBinaryString(10);
         line.classList.add('show');
         setTimeout(function () {
             backspace(line, callback);
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (charIndex > 0) {
                 line.textContent = line.textContent.slice(0, charIndex - 1) + '_';
                 charIndex--;
-                setTimeout(eraseChar, 50);
+                setTimeout(eraseChar, 30);
             } else {
                 line.textContent = '_';
                 setTimeout(callback, 200);
@@ -48,12 +48,12 @@ document.addEventListener('DOMContentLoaded', function () {
         function typeNextWord() {
             let word = words[currentWord];
             gsap.to(firstLine, {
-                duration: 1.8,
+                duration: 2.5,
                 scrambleText: {
                     text: word,
                     chars: "01",
-                    speed: 0.1,
-                    revealDelay: 0.06,
+                    speed: 0.05,
+                    revealDelay: 0.05,
                 },
                 ease: "power3.out", // Easing applied for a smoother effect
                 onUpdate: function () {
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (charIndex > 0) {
                     firstLine.innerHTML = word.slice(0, charIndex - 1) + '<span class="cursor">_</span>';
                     charIndex--;
-                    setTimeout(eraseChar, 50);
+                    setTimeout(eraseChar, 30);
                 } else {
                     currentWord = (currentWord + 1) % words.length;
                     setTimeout(typeNextWord, 200);
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Apply static typing effect without cursor for specific lines
-    function applyStaticEffect(line, duration = 1.8, speed = 0.1, hideCursor = false) {
+    function applyStaticEffect(line, duration = 2.5, speed = 0.05, hideCursor = false) {
         const originalText = line.textContent.replace('_', '');
         applyBinaryEffect(line, function () {
             gsap.to(line, {
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     text: originalText,
                     chars: "01",
                     speed: speed,
-                    revealDelay: 0.06,
+                    revealDelay: 0.05,
                 },
                 ease: "power3.out", // Easing applied for a smoother effect
                 onUpdate: function () {
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (target === h1Wrapper) {
                         // Apply animations to H1 lines only when the full H1 wrapper is in view
                         applyBinaryEffect(firstLine, typeWords);
-                        applyStaticEffect(secondLine, 1.8, 0.1, true); // No cursor for H1 line2
+                        applyStaticEffect(secondLine, 2.5, 0.05, true); // No cursor for H1 line2
                         applyStaticEffect(thirdLine);
                     }
                     observer.unobserve(target); // Stop observing after the animation is triggered

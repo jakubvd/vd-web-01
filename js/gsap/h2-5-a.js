@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    function generateShuffledBinaryString(length = 4) {
+    function generateShuffledBinaryString(length = 2) {
         let result = '';
         for (let i = 0; i < length; i++) {
             result += Math.random() > 0.5 ? '1' : '0';
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function applyBinaryEffect(line, callback) {
-        line.textContent = generateShuffledBinaryString(4); // Set to 4 digits
+        line.textContent = generateShuffledBinaryString(2); // Set to 2 digits
         line.classList.add('show');
         setTimeout(function () {
             backspace(line, callback);

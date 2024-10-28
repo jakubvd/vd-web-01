@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (charIndex > 0) {
                 line.textContent = line.textContent.slice(0, charIndex - 1) + '_';
                 charIndex--;
-                setTimeout(eraseChar, 40);
+                setTimeout(eraseChar, 30);
             } else {
                 line.textContent = '_';
                 setTimeout(callback, 200);
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         eraseChar();
     }
 
-    function applyStaticEffect(line, duration = 2.0, speed = 0.1) {
+    function applyStaticEffect(line, duration = 2.5, speed = 0.1) {
         const originalText = line.textContent.replace('_', '');
 
         applyBinaryEffect(line, function () {
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     text: originalText,
                     chars: "01",
                     speed: speed,
-                    revealDelay: 0.06
+                    revealDelay: 0.05
                 },
                 onUpdate: function () {
                     // Only add cursor if this is not the first line in a two-lined h2

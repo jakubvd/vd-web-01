@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentWord = 0;
 
     function applyBinaryEffect(line, callback) {
-        line.textContent = "01_"; // Set static binary text with underscore
+        line.textContent = "0101010101_"; // Set static 10-digit binary text with underscore
         line.classList.add('show');
         setTimeout(function () {
             backspace(line, callback);
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function backspace(line, callback) {
-        let charIndex = 2; // Start erasing from the last character in "01_"
+        let charIndex = 10; // Start erasing from the end of "0101010101_"
         function eraseChar() {
             if (charIndex > 0) {
                 line.textContent = line.textContent.slice(0, charIndex - 1) + '_';
@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function applyStaticEffect(line, duration = 2.5, hideCursor = false) {
         const originalText = line.textContent.replace('_', '');
+
         applyBinaryEffect(line, function () {
             gsap.to(line, {
                 duration: duration,

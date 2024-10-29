@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         {
             className: '.obj-c-mobile',
             svgPath: 'https://cdn.prod.website-files.com/671432984c4141713295f3e9/67158ce7b37a32f88f072114_maint-b2-4.svg',
-            scale: 0.097,  // Specific scale for Object C
+            scale: 0.098,  // Specific scale for Object C
             color: 0x131211,
         },
         {
@@ -61,9 +61,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     const geometry = new THREE.ExtrudeGeometry(shape, {
                         depth: 30,
                         bevelEnabled: true,
-                        bevelThickness: 5,
-                        bevelSize: 5,
-                        bevelSegments: 8,
+                        bevelThickness: 8,
+                        bevelSize: 6,
+                        bevelSegments: 10,
                     });
                     const mesh = new THREE.Mesh(geometry, material.clone());
                     group.add(mesh);
@@ -82,13 +82,13 @@ document.addEventListener("DOMContentLoaded", function () {
             controls.enableZoom = false;
             controls.enablePan = false;
             controls.enableDamping = true;
-            controls.dampingFactor = 0.1;
-            controls.rotateSpeed = 0.2;
+            controls.dampingFactor = 0.05;
+            controls.rotateSpeed = 0.1;
             controls.minPolarAngle = Math.PI / 2;
             controls.maxPolarAngle = Math.PI / 2;
 
             function animate() {
-                pivot.rotation.y += 0.009;
+                pivot.rotation.y += 0.005;
                 controls.update();
                 renderer.render(scene, camera);
                 requestAnimationFrame(animate);

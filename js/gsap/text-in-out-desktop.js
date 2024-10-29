@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 trigger: selector,
                 start: start, // INDIVIDUAL START POSITION FOR EACH SECTION
                 end: end, // ADJUSTED END POSITION FOR SECTION_INTRO TO END EVEN EARLIER
-                scrub: 4, // Higher scrub value for smoother scrolling animation
+                scrub: 2, // Higher scrub value for smoother scrolling animation
                 toggleActions: "restart none none none", // Restart animation each time it enters view
                 onEnter: () => console.log(`${selector} entered`), // Optional: Log entry
                 onLeave: () => console.log(`${selector} left`), // Optional: Log exit

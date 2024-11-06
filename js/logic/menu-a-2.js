@@ -9,7 +9,7 @@ function showMenu() {
 
 // Function to hide the menu with GSAP animation
 function hideMenu() {
-    gsap.to(menuDiv, { right: '-20%', duration: 2.0, ease: 'power3.in' }); // Slide menu out of view
+    gsap.to(menuDiv, { right: '-20%', duration: 1.2, ease: 'power3.in' }); // Slide menu out of view
 }
 
 // Event listeners for hover functionality

@@ -22,7 +22,7 @@ menuButton.addEventListener('mouseleave', () => {
         if (!menuButton.matches(':hover') && !menuDiv.matches(':hover')) {
             hideMenu();
         }
-    }, 140); // Small delay for smoother UX
+    }, 120); // Small delay for smoother UX
 });
 
 menuDiv.addEventListener('mouseleave', () => {
@@ -30,5 +30,5 @@ menuDiv.addEventListener('mouseleave', () => {
         if (!menuButton.matches(':hover') && !menuDiv.matches(':hover')) {
             hideMenu();
         }
-    }, 140); // Small delay for smoother UX
+    }, 120); // Small delay for smoother UX
 });

@@ -4,12 +4,12 @@ const menuDiv = document.querySelector('.menu-div');
 
 // Function to show the menu with GSAP animation
 function showMenu() {
-    gsap.to(menuDiv, { right: '0%', duration: 1.0, ease: 'power3.inOut' }); // Slide menu into view
+    gsap.to(menuDiv, { right: '0%', duration: 3.0, ease: 'power3.out' }); // Slide menu into view
 }
 
 // Function to hide the menu with GSAP animation
 function hideMenu() {
-    gsap.to(menuDiv, { right: '-20%', duration: 1.0, ease: 'power3.inOut' }); // Slide menu out of view
+    gsap.to(menuDiv, { right: '-20%', duration: 3.0, ease: 'power3.out' }); // Slide menu out of view
 }
 
 // Event listeners for hover functionality
@@ -22,7 +22,7 @@ menuButton.addEventListener('mouseleave', () => {
         if (!menuButton.matches(':hover') && !menuDiv.matches(':hover')) {
             hideMenu();
         }
-    }, 200); // Small delay for smoother UX
+    }, 140); // Small delay for smoother UX
 });
 
 menuDiv.addEventListener('mouseleave', () => {
@@ -30,5 +30,5 @@ menuDiv.addEventListener('mouseleave', () => {
         if (!menuButton.matches(':hover') && !menuDiv.matches(':hover')) {
             hideMenu();
         }
-    }, 200); // Small delay for smoother UX
+    }, 140); // Small delay for smoother UX
 });

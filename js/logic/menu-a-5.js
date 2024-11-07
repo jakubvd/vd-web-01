@@ -9,38 +9,47 @@ const menuLinks = [
     document.getElementById('menu-link-5')
 ];
 
+// Flag to check if the menu is already open
+let isMenuOpen = false;
+
 // Function to show the menu with staggered animation
 function showMenu() {
-    gsap.to(menuDiv, { right: '0%', duration: 0.5, ease: 'power2.out' }); // Slide menu container into view
+    if (!isMenuOpen) {
+        isMenuOpen = true; // Set the flag to true
+        gsap.to(menuDiv, { right: '0%', duration: 0.5, ease: 'power2.out' }); // Slide menu container into view
 
-    // Stagger each menu link to slide in one by one
-    gsap.fromTo(menuLinks, 
-        { x: '100%', opacity: 0 },  // Start position: out of view (right)
-        { 
-            x: '0%',                  // End position: in view
-            opacity: 1,
-            duration: 0.5,
-            ease: 'power2.out',
-            stagger: 0.1              // Delay between each link
-        }
-    );
+        // Stagger each menu link to slide in one by one
+        gsap.fromTo(menuLinks, 
+            { x: '100%', opacity: 0 },  // Start position: out of view (right)
+            { 
+                x: '0%',                  // End position: in view
+                opacity: 1,
+                duration: 0.5,
+                ease: 'power2.out',
+                stagger: 0.1              // Delay between each link
+            }
+        );
+    }
 }
 
 // Function to hide the menu with staggered reverse animation
 function hideMenu() {
-    // Stagger each menu link to slide out in reverse order
-    gsap.to(menuLinks, 
-        { 
-            x: '100%',               // Move back out to the right
-            opacity: 0,
-            duration: 0.5,
-            ease: 'power2.in',
-            stagger: -0.1            // Negative stagger for reverse effect
-        }
-    );
+    if (isMenuOpen) {
+        isMenuOpen = false; // Reset the flag to false
+        // Stagger each menu link to slide out in reverse order
+        gsap.to(menuLinks, 
+            { 
+                x: '100%',               // Move back out to the right
+                opacity: 0,
+                duration: 0.5,
+                ease: 'power2.in',
+                stagger: -0.1            // Negative stagger for reverse effect
+            }
+        );
 
-    // Hide the entire menu container after links finish moving out
-    gsap.to(menuDiv, { right: '-20%', duration: 0.5, delay: 0.5, ease: 'power2.in' });
+        // Hide the entire menu container after links finish moving out
+        gsap.to(menuDiv, { right: '-20%', duration: 0.5, delay: 0.5, ease: 'power2.in' });
+    }
 }
 
 // Helper function to handle mouse leave with delay

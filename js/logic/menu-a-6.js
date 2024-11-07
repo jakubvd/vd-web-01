@@ -16,7 +16,7 @@ const menuTimeline = gsap.timeline({ paused: true, reversed: true });
 menuTimeline.to(menuDiv, { 
     right: '0%', 
     duration: 1.0,         // Longer duration for smoother entry
-    ease: 'power4.out'     // Smooth, decelerated easing for entry
+    ease: 'power1.out'     // Smooth, decelerated easing for entry
 });
 menuTimeline.fromTo(menuLinks, 
     { x: '100%', opacity: 0 }, // Start position: out of view (right)
@@ -24,8 +24,8 @@ menuTimeline.fromTo(menuLinks,
         x: '0%',                  // End position: in view
         opacity: 1,
         duration: 1.0,            // Longer duration for smoother entry
-        ease: 'power4.out',       // Smooth, decelerated easing for entry
-        stagger: 0.15             // Increased stagger for a more gradual reveal
+        ease: 'power1.out',       // Smooth, decelerated easing for entry
+        stagger: 0.1             // Increased stagger for a more gradual reveal
     },
     '-=0.7' // Sync start of links with menuDiv animation
 );
@@ -36,8 +36,8 @@ menuTimeline.eventCallback("onReverseComplete", () => {
         x: '100%',                // Move back out to the right
         opacity: 0,
         duration: 1.0,            // Longer duration for smooth reverse
-        ease: 'power4.in',        // Smooth reverse easing with deceleration
-        stagger: -0.15            // Negative stagger for reverse order
+        ease: 'power1.in',        // Smooth reverse easing with deceleration
+        stagger: -0.1            // Negative stagger for reverse order
     });
 });
 

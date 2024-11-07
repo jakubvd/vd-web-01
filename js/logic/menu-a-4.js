@@ -19,7 +19,7 @@ function showMenu() {
 // Function to hide the menu with GSAP animation
 function hideMenu() {
     if (isDesktop()) {
-        gsap.to(menuDiv, { right: '-20%', duration: 1.0, ease: 'power2.in' }); // Slide menu out of view
+        gsap.to(menuDiv, { right: '-20%', duration: 1.0, ease: 'power1.in' }); // Slide menu out of view
         console.log('Menu hidden'); // Debug: Confirm function runs on desktop breakpoints
     }
 }

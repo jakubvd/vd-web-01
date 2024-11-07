@@ -15,19 +15,19 @@ const menuTimeline = gsap.timeline({ paused: true, reversed: true });
 // Define the animation sequence for menu entrance
 menuTimeline.to(menuDiv, { 
     right: '0%', 
-    duration: 0.6,         // Slightly longer entrance for smoother feel
-    ease: 'power4.out'     // Softer, smoother entrance easing
+    duration: 1.0,         // Longer duration for smoother entry
+    ease: 'power4.out'     // Smooth, decelerated easing for entry
 });
 menuTimeline.fromTo(menuLinks, 
     { x: '100%', opacity: 0 }, // Start position: out of view (right)
     { 
         x: '0%',                  // End position: in view
         opacity: 1,
-        duration: 0.6,            // Slightly longer for smoother feel
-        ease: 'power4.out',       // Softer, smoother entrance easing
-        stagger: 0.1              // Delay between each link
+        duration: 1.0,            // Longer duration for smoother entry
+        ease: 'power4.out',       // Smooth, decelerated easing for entry
+        stagger: 0.15             // Increased stagger for a more gradual reveal
     },
-    '-=0.5' // Sync start of links with menuDiv animation
+    '-=0.7' // Sync start of links with menuDiv animation
 );
 
 // Apply smoother easing and duration for the reverse animation
@@ -35,9 +35,9 @@ menuTimeline.eventCallback("onReverseComplete", () => {
     gsap.to(menuLinks, {
         x: '100%',                // Move back out to the right
         opacity: 0,
-        duration: 0.7,            // Slightly longer exit duration for smoothness
-        ease: 'power4.in',        // Smooth reverse easing
-        stagger: -0.1             // Negative stagger for reverse order
+        duration: 1.0,            // Longer duration for smooth reverse
+        ease: 'power4.in',        // Smooth reverse easing with deceleration
+        stagger: -0.15            // Negative stagger for reverse order
     });
 });
 

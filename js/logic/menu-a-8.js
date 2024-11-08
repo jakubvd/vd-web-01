@@ -26,9 +26,9 @@ menuTimeline.fromTo(menuLinks,
     { 
         x: '0%',                  
         opacity: 1,
-        duration: 0.3,            
+        duration: 0.33,            // Increased duration by 10% for slower appearance
         ease: 'power1.out',       
-        stagger: 0.1             
+        stagger: 0.11              // Increased stagger by 10% for gradual appearance
     },
     '-=0.3'
 );
@@ -37,9 +37,9 @@ menuTimeline.eventCallback("onReverseComplete", () => {
     gsap.to(menuLinks, {
         x: '100%',                
         opacity: 0,
-        duration: 0.3,            
+        duration: 0.33,            // Matched duration for reverse
         ease: 'power1.in',        
-        stagger: -0.10            
+        stagger: -0.11             // Matched stagger for reverse order
     });
 });
 
@@ -69,14 +69,14 @@ menuDiv.addEventListener('mouseenter', showMenu);
 menuButton.addEventListener('mouseleave', handleMouseLeave);
 menuDiv.addEventListener('mouseleave', handleMouseLeave);
 
-// Helper function to calculate dynamic scroll duration with a slower multiplier
+// Helper function to calculate dynamic scroll duration with a slightly slower multiplier
 function getScrollDuration(target) {
     const currentScroll = window.scrollY;
     const targetOffset = document.querySelector(target).offsetTop;
     const distance = Math.abs(targetOffset - currentScroll);
 
-    // Adjusted multiplier for slightly slower scroll (increased by ~10%)
-    return Math.min(Math.max(distance * 0.00077, 0.3), 2.2); // Min 0.3s, max 2.2s
+    // Adjusted multiplier for 15% slower scroll
+    return Math.min(Math.max(distance * 0.00089, 0.3), 2.5); // Min 0.3s, max 2.5s
 }
 
 // Scroll-to-section functionality with dynamic duration and easing

@@ -18,7 +18,7 @@ const menuTimeline = gsap.timeline({ paused: true, reversed: true });
 // Define the animation sequence for menu entrance
 menuTimeline.to(menuDiv, { 
     right: '0%', 
-    duration: 1.0,         
+    duration: 0.7,         
     ease: 'sine.out'       
 });
 menuTimeline.fromTo(menuLinks, 
@@ -26,18 +26,18 @@ menuTimeline.fromTo(menuLinks,
     { 
         x: '0%',                  
         opacity: 1,
-        duration: 1.0,            
+        duration: 0.3,            
         ease: 'power1.out',       
         stagger: 0.1             
     },
-    '-=0.7'
+    '-=0.3'
 );
 
 menuTimeline.eventCallback("onReverseComplete", () => {
     gsap.to(menuLinks, {
         x: '100%',                
         opacity: 0,
-        duration: 1.0,            
+        duration: 0.3,            
         ease: 'power1.in',        
         stagger: -0.10            
     });
@@ -69,14 +69,14 @@ menuDiv.addEventListener('mouseenter', showMenu);
 menuButton.addEventListener('mouseleave', handleMouseLeave);
 menuDiv.addEventListener('mouseleave', handleMouseLeave);
 
-// Helper function to calculate dynamic scroll duration with faster multiplier
+// Helper function to calculate dynamic scroll duration with a slower multiplier
 function getScrollDuration(target) {
     const currentScroll = window.scrollY;
     const targetOffset = document.querySelector(target).offsetTop;
     const distance = Math.abs(targetOffset - currentScroll);
 
-    // Adjust multiplier for faster scroll and cap duration
-    return Math.min(Math.max(distance * 0.0007, 0.3), 2); // Min 0.3s, max 2s
+    // Adjusted multiplier for slightly slower scroll (increased by ~10%)
+    return Math.min(Math.max(distance * 0.00077, 0.3), 2.2); // Min 0.3s, max 2.2s
 }
 
 // Scroll-to-section functionality with dynamic duration and easing

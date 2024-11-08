@@ -16,7 +16,7 @@ const menuTimeline = gsap.timeline({ paused: true, reversed: true });
 menuTimeline.to(menuDiv, { 
     right: '0%', 
     duration: 1.0,         // Longer duration for smoother entry
-    ease: 'power1.out'     // Smooth, decelerated easing for entry
+    ease: 'sine.out'     // Smooth, decelerated easing for entry
 });
 menuTimeline.fromTo(menuLinks, 
     { x: '100%', opacity: 0 }, // Start position: out of view (right)

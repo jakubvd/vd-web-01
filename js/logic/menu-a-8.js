@@ -69,33 +69,33 @@ menuDiv.addEventListener('mouseenter', showMenu);
 menuButton.addEventListener('mouseleave', handleMouseLeave);
 menuDiv.addEventListener('mouseleave', handleMouseLeave);
 
-// Helper function to calculate dynamic scroll duration
+// Helper function to calculate dynamic scroll duration with faster multiplier
 function getScrollDuration(target) {
     const currentScroll = window.scrollY;
     const targetOffset = document.querySelector(target).offsetTop;
     const distance = Math.abs(targetOffset - currentScroll);
 
-    // Calculate duration (e.g., 0.001 seconds per pixel distance, adjust multiplier as needed)
-    return Math.min(Math.max(distance * 0.001, 0.5), 3); // Min 0.5s, max 3s for scroll duration
+    // Adjust multiplier for faster scroll and cap duration
+    return Math.min(Math.max(distance * 0.0007, 0.3), 2); // Min 0.3s, max 2s
 }
 
-// Scroll-to-section functionality with dynamic duration
+// Scroll-to-section functionality with dynamic duration and easing
 document.getElementById('menu-link-1').addEventListener('click', () => {
-    gsap.to(window, { duration: getScrollDuration("#service"), scrollTo: "#service" });
+    gsap.to(window, { duration: getScrollDuration("#service"), scrollTo: "#service", ease: "power2.out" });
 });
 
 document.getElementById('menu-link-2').addEventListener('click', () => {
-    gsap.to(window, { duration: getScrollDuration("#technology"), scrollTo: "#technology" });
+    gsap.to(window, { duration: getScrollDuration("#technology"), scrollTo: "#technology", ease: "power2.out" });
 });
 
 document.getElementById('menu-link-3').addEventListener('click', () => {
-    gsap.to(window, { duration: getScrollDuration("#process"), scrollTo: "#process" });
+    gsap.to(window, { duration: getScrollDuration("#process"), scrollTo: "#process", ease: "power2.out" });
 });
 
 document.getElementById('menu-link-4').addEventListener('click', () => {
-    gsap.to(window, { duration: getScrollDuration("#contact"), scrollTo: "#contact" });
+    gsap.to(window, { duration: getScrollDuration("#contact"), scrollTo: "#contact", ease: "power2.out" });
 });
 
 document.getElementById('menu-link-5').addEventListener('click', () => {
-    gsap.to(window, { duration: getScrollDuration("#faq"), scrollTo: "#faq" });
+    gsap.to(window, { duration: getScrollDuration("#faq"), scrollTo: "#faq", ease: "power2.out" });
 });

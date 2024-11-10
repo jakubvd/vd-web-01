@@ -35,7 +35,7 @@ menuTimeline.fromTo(menuLinks,
         ease: 'sine.out',       
         stagger: 0.1
     },
-    '-=0.6'
+    '-=0.5'
 );
 
 // Functions to show and hide the menu
@@ -74,14 +74,14 @@ function getScrollDuration(target) {
 
     let duration;
     if (distance > 2000) {
-        duration = distance * 0.00108; // 10% faster multiplier for far distances
+        duration = distance * 0.001; // Increase the multiplier to make the scroll slower (takes more time)
     } else if (distance > 1000) {
-        duration = distance * 0.00081; // 10% faster multiplier for medium distances
+        duration = distance * 0.0009; // Decrease the multiplier to make the scroll faster (takes less time).
     } else {
-        duration = distance * 0.00063; // 10% faster multiplier for close distances
+        duration = distance * 0.00001; // faster multiplier for close distances
     }
 
-    return Math.min(Math.max(duration, 0.3), 3.5);
+    return Math.min(Math.max(duration, 0.5), 2.5);
 }
 
 // Scroll-to-section functionality with adjusted duration and easing for menu links

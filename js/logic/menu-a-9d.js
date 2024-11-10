@@ -28,43 +28,43 @@ menuLinks.forEach(link => {
     link.addEventListener('mouseenter', () => {
         gsap.to(link, {
             backgroundColor: 'var(--white-tint-hover-50)', // Background color change
-            duration: 0.25,
-            ease: 'power2.out'
+            duration: 0.1,
+            ease: 'power1.in'
         });
 
         // Text color change
         gsap.to(link.querySelector('.menu_nav_link_text'), {
             color: 'var(--black-1)',
-            duration: 0.25,
-            ease: 'power2.out'
+            duration: 0.1,
+            ease: 'power1.in'
         });
 
         // Image filter change
         gsap.to(link.querySelector('.img_m_button'), {
             filter: 'invert(0%)',
-            duration: 0.25,
-            ease: 'power2.out'
+            duration: 0.2,
+            ease: 'power2.in'
         });
     });
 
     link.addEventListener('mouseleave', () => {
         gsap.to(link, {
             backgroundColor: '', // Revert to CSS background color
-            duration: 0.25,
-            ease: 'power2.out'
+            duration: 0.1,
+            ease: 'power1.out'
         });
 
         // Revert text color
         gsap.to(link.querySelector('.menu_nav_link_text'), {
             color: '', // Revert to CSS text color
-            duration: 0.25,
-            ease: 'power2.out'
+            duration: 0.1,
+            ease: 'power1.out'
         });
 
         // Revert image filter
         gsap.to(link.querySelector('.img_m_button'), {
             filter: '', // Revert to CSS filter
-            duration: 0.25,
+            duration: 0.2,
             ease: 'power2.out'
         });
     });

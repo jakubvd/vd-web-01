@@ -17,6 +17,14 @@ window.addEventListener('hashchange', (event) => {
     event.preventDefault();
 }, false);
 
+// Observer to track visibility changes
+const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+        console.log(`Mutation detected on ${mutation.target.id}:`, mutation);
+    });
+});
+observer.observe(document.getElementById('menu-link-1'), { attributes: true, attributeFilter: ['style'] });
+
 // Force repaint on hover to stabilize visibility
 menuLinks.forEach(link => {
     link.addEventListener('mouseenter', () => {
@@ -38,7 +46,7 @@ menuLinks.forEach(link => {
 });
 
 // Create a GSAP timeline for the menu animation
-const menuTimeline = gsap.timeline({ paused: true, reversed: true });
+const menuTimeline = gsap.timeline({ paused: true, reversed: true, invalidateOnRefresh: true });
 
 // Define the animation sequence for menu entrance
 menuTimeline.to(menuDiv, { 
@@ -120,26 +128,21 @@ function getScrollDuration(target) {
 
 // Scroll-to-section functionality with adjusted duration and easing
 document.getElementById('menu-link-1').addEventListener('click', () => {
-    event.preventDefault();  // Prevent default # behavior
     gsap.to(window, { duration: getScrollDuration("#service"), scrollTo: "#service", ease: "power2.out" });
 });
 
 document.getElementById('menu-link-2').addEventListener('click', () => {
-    event.preventDefault();
     gsap.to(window, { duration: getScrollDuration("#technology"), scrollTo: "#technology", ease: "power2.out" });
 });
 
 document.getElementById('menu-link-3').addEventListener('click', () => {
-    event.preventDefault();
     gsap.to(window, { duration: getScrollDuration("#process"), scrollTo: "#process", ease: "power2.out" });
 });
 
 document.getElementById('menu-link-4').addEventListener('click', () => {
-    event.preventDefault();
     gsap.to(window, { duration: getScrollDuration("#contact"), scrollTo: "#contact", ease: "power2.out" });
 });
 
 document.getElementById('menu-link-5').addEventListener('click', () => {
-    event.preventDefault();
     gsap.to(window, { duration: getScrollDuration("#faq"), scrollTo: "#faq", ease: "power2.out" });
 });

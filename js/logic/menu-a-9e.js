@@ -78,10 +78,10 @@ function getScrollDuration(target) {
     } else if (distance > 1000) {
         duration = distance * 0.0009; // Decrease the multiplier to make the scroll faster (takes less time).
     } else {
-        duration = distance * 0.00001; // faster multiplier for close distances
+        duration = distance * 0.0009; // faster multiplier for close distances
     }
 
-    return Math.min(Math.max(duration, 0.5), 2.5);
+    return Math.min(Math.max(duration, 0.8), 2.5);
 }
 
 // Scroll-to-section functionality with adjusted duration and easing for menu links

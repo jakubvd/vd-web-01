@@ -26,19 +26,19 @@ menuTimeline.fromTo(menuLinks,
     { 
         x: '0%',                  
         opacity: 1,
-        duration: 0.5,            // Increased duration by 10% for slower appearance
-        ease: 'power1.out',       
+        duration: 0.4,            // Increased duration by 10% for slower appearance
+        ease: 'sine.out',       
         stagger: 0.1              // Kept stagger for a gradual reveal
     },
-    '-=0.5'
+    '-=0.6'
 );
 
 menuTimeline.eventCallback("onReverseComplete", () => {
     gsap.to(menuLinks, {
         x: '100%',                
         opacity: 0,
-        duration: 0.5,            // Matched duration for reverse
-        ease: 'power1.in',        
+        duration: 0.4,            // Matched duration for reverse
+        ease: 'sine.in',        
         stagger: -0.1             // Matched stagger for reverse order
     });
 });

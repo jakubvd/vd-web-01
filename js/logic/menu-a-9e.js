@@ -38,23 +38,6 @@ menuTimeline.fromTo(menuLinks,
     '-=0.6'
 );
 
-// Event callbacks for debugging
-menuTimeline.eventCallback("onComplete", () => {
-    menuLinks.forEach(link => {
-        console.log(`Link ${link.id} visibility: ${getComputedStyle(link).opacity}`);
-    });
-});
-
-menuTimeline.eventCallback("onReverseComplete", () => {
-    gsap.to(menuLinks, {
-        x: '100%',                
-        opacity: 0,
-        duration: 0.4,
-        ease: 'sine.in',        
-        stagger: -0.1
-    });
-});
-
 // Functions to show and hide the menu
 function showMenu() {
     if (menuTimeline.reversed()) {
@@ -101,7 +84,7 @@ function getScrollDuration(target) {
     return Math.min(Math.max(duration, 0.3), 3.5);
 }
 
-// Scroll-to-section functionality with adjusted duration and easing
+// Scroll-to-section functionality with adjusted duration and easing for menu links
 document.getElementById('menu-link-1').addEventListener('click', () => {
     gsap.to(window, { duration: getScrollDuration("#service"), scrollTo: "#service", ease: "power2.out" });
 });
@@ -119,5 +102,46 @@ document.getElementById('menu-link-4').addEventListener('click', () => {
 });
 
 document.getElementById('menu-link-5').addEventListener('click', () => {
+    gsap.to(window, { duration: getScrollDuration("#faq"), scrollTo: "#faq", ease: "power2.out" });
+});
+
+// Additional scroll-to functionality for the new buttons
+document.getElementById('but-hero-1').addEventListener('click', () => {
+    gsap.to(window, { duration: getScrollDuration("#contact"), scrollTo: "#contact", ease: "power2.out" });
+});
+
+document.getElementById('but-hero-2').addEventListener('click', () => {
+    gsap.to(window, { duration: getScrollDuration("#intro"), scrollTo: "#intro", ease: "power2.out" });
+});
+
+document.getElementById('but-intro').addEventListener('click', () => {
+    gsap.to(window, { duration: getScrollDuration("#service"), scrollTo: "#service", ease: "power2.out" });
+});
+
+document.getElementById('but-proc').addEventListener('click', () => {
+    gsap.to(window, { duration: getScrollDuration("#contact"), scrollTo: "#contact", ease: "power2.out" });
+});
+
+document.getElementById('but-faq').addEventListener('click', () => {
+    gsap.to(window, { duration: getScrollDuration("#contact"), scrollTo: "#contact", ease: "power2.out" });
+});
+
+document.getElementById('but-f-1').addEventListener('click', () => {
+    gsap.to(window, { duration: getScrollDuration("#service"), scrollTo: "#service", ease: "power2.out" });
+});
+
+document.getElementById('but-f-2').addEventListener('click', () => {
+    gsap.to(window, { duration: getScrollDuration("#technology"), scrollTo: "#technology", ease: "power2.out" });
+});
+
+document.getElementById('but-f-3').addEventListener('click', () => {
+    gsap.to(window, { duration: getScrollDuration("#process"), scrollTo: "#process", ease: "power2.out" });
+});
+
+document.getElementById('but-f-4').addEventListener('click', () => {
+    gsap.to(window, { duration: getScrollDuration("#contact"), scrollTo: "#contact", ease: "power2.out" });
+});
+
+document.getElementById('but-f-5').addEventListener('click', () => {
     gsap.to(window, { duration: getScrollDuration("#faq"), scrollTo: "#faq", ease: "power2.out" });
 });

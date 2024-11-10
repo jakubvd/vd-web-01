@@ -18,7 +18,7 @@ const menuTimeline = gsap.timeline({ paused: true, reversed: true });
 // Define the animation sequence for menu entrance
 menuTimeline.to(menuDiv, { 
     right: '0%', 
-    duration: 0.7,         
+    duration: 0.8,         
     ease: 'sine.out'       
 });
 menuTimeline.fromTo(menuLinks, 
@@ -26,20 +26,20 @@ menuTimeline.fromTo(menuLinks,
     { 
         x: '0%',                  
         opacity: 1,
-        duration: 0.36,            // Increased duration by 10% for slower appearance
+        duration: 0.5,            // Increased duration by 10% for slower appearance
         ease: 'power1.out',       
-        stagger: 0.11              // Kept stagger for a gradual reveal
+        stagger: 0.1              // Kept stagger for a gradual reveal
     },
-    '-=0.3'
+    '-=0.5'
 );
 
 menuTimeline.eventCallback("onReverseComplete", () => {
     gsap.to(menuLinks, {
         x: '100%',                
         opacity: 0,
-        duration: 0.36,            // Matched duration for reverse
+        duration: 0.5,            // Matched duration for reverse
         ease: 'power1.in',        
-        stagger: -0.11             // Matched stagger for reverse order
+        stagger: -0.1             // Matched stagger for reverse order
     });
 });
 

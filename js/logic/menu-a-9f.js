@@ -17,6 +17,44 @@ window.addEventListener('hashchange', (event) => {
     event.preventDefault();
 }, false);
 
+// Function to initialize event listeners based on viewport width
+function initializeMenuBehavior() {
+    // Clear previous event listeners
+    menuButton.replaceWith(menuButton.cloneNode(true));
+    menuDiv.replaceWith(menuDiv.cloneNode(true));
+
+    // Re-select elements after cloning to remove previous listeners
+    const newMenuButton = document.querySelector('.menu-button');
+    const newMenuDiv = document.querySelector('.menu-div');
+
+    if (window.innerWidth <= 991) {
+        // For mobile/tablet viewports, toggle the menu on click
+        newMenuButton.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking outside menu-button or menu-div
+        document.addEventListener('click', (event) => {
+            const isOutsideMenu = !newMenuDiv.contains(event.target) && !newMenuButton.contains(event.target);
+            if (isOutsideMenu && !menuTimeline.reversed()) {
+                hideMenu();
+            }
+        });
+    } else {
+        // For desktop viewports, use hover to show/hide menu
+        newMenuButton.addEventListener('mouseenter', showMenu);
+        newMenuDiv.addEventListener('mouseenter', showMenu);
+        newMenuButton.addEventListener('mouseleave', handleMouseLeave);
+        newMenuDiv.addEventListener('mouseleave', handleMouseLeave);
+    }
+}
+
+// Function to handle viewport resizing and reinitialize menu behavior if breakpoint is crossed
+window.addEventListener('resize', () => {
+    initializeMenuBehavior();
+});
+
+// Initial call to set up event listeners based on initial viewport width
+initializeMenuBehavior();
+
 // Create a GSAP timeline for the menu animation without altering CSS positioning
 const menuTimeline = gsap.timeline({ paused: true, reversed: true, invalidateOnRefresh: true });
 const menuDivDuration = window.innerWidth <= 478 ? 0.5 : 0.8;
@@ -52,33 +90,13 @@ function hideMenu() {
     }
 }
 
-// Toggle the menu based on viewport size
+// Toggle menu function for mobile (991px and below)
 function toggleMenu() {
     if (menuTimeline.reversed()) {
         menuTimeline.play();
     } else {
         menuTimeline.reverse();
     }
-}
-
-// Event listeners based on viewport width
-if (window.innerWidth <= 991) {
-    // For mobile/tablet viewports, toggle the menu on click
-    menuButton.addEventListener('click', toggleMenu);
-
-    // Close menu when clicking outside menu-button or menu-div
-    document.addEventListener('click', (event) => {
-        const isOutsideMenu = !menuDiv.contains(event.target) && !menuButton.contains(event.target);
-        if (isOutsideMenu && !menuTimeline.reversed()) {
-            hideMenu();
-        }
-    });
-} else {
-    // For desktop viewports, use hover to show/hide menu
-    menuButton.addEventListener('mouseenter', showMenu);
-    menuDiv.addEventListener('mouseenter', showMenu);
-    menuButton.addEventListener('mouseleave', handleMouseLeave);
-    menuDiv.addEventListener('mouseleave', handleMouseLeave);
 }
 
 // Add a delay on mouse leave to avoid accidental hiding (for desktop only)
@@ -90,7 +108,7 @@ function handleMouseLeave() {
     }, 100);
 }
 
-// Helper function to calculate dynamic scroll duration based on distance
+// Helper function to calculate dynamic scroll duration based on distance, now 10% faster
 function getScrollDuration(target) {
     const currentScroll = window.scrollY;
     const targetOffset = document.querySelector(target).offsetTop;

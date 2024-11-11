@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return window.innerWidth <= 767;
     }
 
-    let startValue = isMobile() ? "top 30%" : "top 90%";
-    let endValue = isMobile() ? "bottom 85%" : "bottom 60%";
+    let startValue = isMobile() ? "top 80%" : "top 90%";
+    let endValue = isMobile() ? "bottom 75%" : "bottom 60%";
 
     const sections = [
         { selector: ".section_intro", textClass: ".intro-text-anim", start: startValue, end: endValue },

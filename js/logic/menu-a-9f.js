@@ -17,14 +17,14 @@ window.addEventListener('hashchange', (event) => {
     event.preventDefault();
 }, false);
 
-// Create a GSAP timeline for the menu animation
+// Create a GSAP timeline for the menu animation without altering CSS positioning
 const menuTimeline = gsap.timeline({ paused: true, reversed: true, invalidateOnRefresh: true });
 const menuDivDuration = window.innerWidth <= 478 ? 0.5 : 0.8;
 
 // Define the animation sequence for menu entrance
 menuTimeline.to(menuDiv, { 
     right: '0%', 
-    duration: menuDivDuration,  // Adjusted duration based on viewport width
+    duration: menuDivDuration, 
     ease: 'sine.out'       
 });
 menuTimeline.fromTo(menuLinks, 
@@ -52,7 +52,7 @@ function hideMenu() {
     }
 }
 
-// Toggle menu function for mobile (991px and below)
+// Toggle the menu based on viewport size
 function toggleMenu() {
     if (menuTimeline.reversed()) {
         menuTimeline.play();

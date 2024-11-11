@@ -17,7 +17,7 @@ window.addEventListener('hashchange', (event) => {
     event.preventDefault();
 }, false);
 
-// Create a GSAP timeline for the menu animation without altering CSS positioning
+// Create a GSAP timeline for the menu animation
 const menuTimeline = gsap.timeline({ paused: true, reversed: true, invalidateOnRefresh: true });
 let menuDivDuration = window.innerWidth <= 478 ? 0.5 : 0.8;
 
@@ -39,7 +39,7 @@ menuTimeline.fromTo(menuLinks,
     '-=0.5'
 );
 
-// Functions to show and hide the menu
+// Show and hide functions
 function showMenu() {
     if (menuTimeline.reversed()) {
         menuTimeline.play();
@@ -52,7 +52,39 @@ function hideMenu() {
     }
 }
 
-// Toggle menu function for mobile (991px and below)
+// Function to switch to hover or click behavior based on viewport size
+function applyMenuBehavior() {
+    const isMobile = window.innerWidth <= 991;
+
+    // Remove previous event listeners to avoid conflicts
+    menuButton.removeEventListener('mouseenter', showMenu);
+    menuDiv.removeEventListener('mouseenter', showMenu);
+    menuButton.removeEventListener('mouseleave', hideMenu);
+    menuDiv.removeEventListener('mouseleave', hideMenu);
+    menuButton.removeEventListener('click', toggleMenu);
+
+    // Apply mobile click-based behavior
+    if (isMobile) {
+        // Toggle on button click for mobile
+        menuButton.addEventListener('click', toggleMenu);
+
+        // Close menu if clicking outside
+        document.addEventListener('click', (event) => {
+            const isOutsideMenu = !menuDiv.contains(event.target) && !menuButton.contains(event.target);
+            if (isOutsideMenu && !menuTimeline.reversed()) {
+                hideMenu();
+            }
+        });
+    } else {
+        // Apply hover-based behavior for desktop
+        menuButton.addEventListener('mouseenter', showMenu);
+        menuDiv.addEventListener('mouseenter', showMenu);
+        menuButton.addEventListener('mouseleave', hideMenu);
+        menuDiv.addEventListener('mouseleave', hideMenu);
+    }
+}
+
+// Toggle function for mobile menu open/close on click
 function toggleMenu() {
     if (menuTimeline.reversed()) {
         menuTimeline.play();
@@ -61,36 +93,11 @@ function toggleMenu() {
     }
 }
 
-// Function to add event listeners based on viewport width
-function applyMenuBehavior() {
-    if (window.innerWidth <= 991) {
-        // Remove hover listeners
-        menuButton.removeEventListener('mouseenter', showMenu);
-        menuDiv.removeEventListener('mouseenter', showMenu);
-        menuButton.removeEventListener('mouseleave', handleMouseLeave);
-        menuDiv.removeEventListener('mouseleave', handleMouseLeave);
+// Initial call to set behavior based on current viewport
+applyMenuBehavior();
 
-        // Add click toggle for mobile/tablet viewports
-        menuButton.addEventListener('click', toggleMenu);
-
-        // Close menu when clicking outside menu-button or menu-div
-        document.addEventListener('click', (event) => {
-            const isOutsideMenu = !menuDiv.contains(event.target) && !menuButton.contains(event.target);
-            if (isOutsideMenu && !menuTimeline.reversed()) {
-                hideMenu();
-            }
-        });
-    } else {
-        // Remove mobile click listener
-        menuButton.removeEventListener('click', toggleMenu);
-
-        // Apply desktop hover listeners
-        menuButton.addEventListener('mouseenter', showMenu);
-        menuDiv.addEventListener('mouseenter', showMenu);
-        menuButton.addEventListener('mouseleave', handleMouseLeave);
-        menuDiv.addEventListener('mouseleave', handleMouseLeave);
-    }
-}
+// Reapply behavior on window resize to adjust based on viewport width changes
+window.addEventListener('resize', applyMenuBehavior);
 
 // Helper function to calculate dynamic scroll duration based on distance
 function getScrollDuration(target) {
@@ -171,7 +178,3 @@ document.getElementById('but-f-4').addEventListener('click', () => {
 document.getElementById('but-f-5').addEventListener('click', () => {
     gsap.to(window, { duration: getScrollDuration("#faq"), scrollTo: "#faq", ease: "power2.out" });
 });
-
-// Call once initially and then again on resize
-applyMenuBehavior();
-window.addEventListener('resize', applyMenuBehavior);

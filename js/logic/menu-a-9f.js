@@ -17,11 +17,9 @@ window.addEventListener('hashchange', (event) => {
     event.preventDefault();
 }, false);
 
-// Determine duration for `menuDiv` based on viewport width
-const menuDivDuration = window.innerWidth <= 478 ? 0.5 : 0.8; // 0.5s for mobile, 0.8s for larger screens
-
-// Create a GSAP timeline for the menu animation with conditional duration
+// Create a GSAP timeline for the menu animation
 const menuTimeline = gsap.timeline({ paused: true, reversed: true, invalidateOnRefresh: true });
+const menuDivDuration = window.innerWidth <= 478 ? 0.5 : 0.8;
 
 // Define the animation sequence for menu entrance
 menuTimeline.to(menuDiv, { 
@@ -54,7 +52,7 @@ function hideMenu() {
     }
 }
 
-// Toggle the menu based on viewport size
+// Toggle menu function for mobile (991px and below)
 function toggleMenu() {
     if (menuTimeline.reversed()) {
         menuTimeline.play();
@@ -67,6 +65,14 @@ function toggleMenu() {
 if (window.innerWidth <= 991) {
     // For mobile/tablet viewports, toggle the menu on click
     menuButton.addEventListener('click', toggleMenu);
+
+    // Close menu when clicking outside menu-button or menu-div
+    document.addEventListener('click', (event) => {
+        const isOutsideMenu = !menuDiv.contains(event.target) && !menuButton.contains(event.target);
+        if (isOutsideMenu && !menuTimeline.reversed()) {
+            hideMenu();
+        }
+    });
 } else {
     // For desktop viewports, use hover to show/hide menu
     menuButton.addEventListener('mouseenter', showMenu);

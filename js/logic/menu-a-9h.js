@@ -146,6 +146,7 @@ document.getElementById('menu-link-4').addEventListener('click', () => {
 
 document.getElementById('menu-link-5').addEventListener('click', () => {
     gsap.to(window, { duration: getScrollDuration("#faq"), scrollTo: "#faq", ease: "power2.out" });
+});
 
 // Additional scroll-to functionality for the new buttons
 document.getElementById('but-hero-1').addEventListener('click', () => {

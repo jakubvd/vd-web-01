@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const sections = [
         { selector: ".section_intro", textClass: ".intro-text-anim", start: startValue, end: endValue },
-        { selector: ".section_outro", textClass: ".outro-text-anim", start: isMobile() ? "top 80%" : "top 90%", end: "bottom center" }
+        { selector: ".section_outro", textClass: ".outro-text-anim", start: isMobile() ? "top 80%" : "top 80%", end: "bottom center" }
     ];
 
     sections.forEach(({ selector, textClass, start, end }) => {

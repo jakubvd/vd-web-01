@@ -74,11 +74,11 @@
 /* CTA Button */
 .button-cta {
     font-family: 'Aspekta', sans-serif;
-    font-weight: 500;
-    font-size: 1.64rem;
-    line-height: 1.32;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.1;
     text-decoration: none;
-    letter-spacing: 0.02rem;
+    letter-spacing: 0px;
     color: var(--black-1-button);
     background-color: var(--black-tint-cards-button);
     padding: 0.73rem 1.98rem 0.97rem 2.0rem;
@@ -88,7 +88,7 @@
     isolation: isolate;
     box-shadow: 0 1px 2px 0.5px rgba(0, 0, 0, 0.15);
     border-radius: 2.5rem;
-    border: 0.125rem solid #595958;
+    border: 2px solid #595958;
     outline: none;
     transform: scale(1);
     transition: background-color var(--spring-duration) var(--spring-easing),
@@ -123,67 +123,33 @@
     outline-offset: 0px;
 }
 
-/* CTA Button Effects */
-.button-cta .shimmer {
-    position: absolute;
-    inset: -40px;
-    border-radius: inherit;
-    mask-image: conic-gradient(
-        from var(--shimmer, 0deg),
-        transparent 0%, transparent 10%,
-        black 36%, black 45%,
-        transparent 50%, transparent 60%,
-        black 85%, black 95%,
-        transparent 100%
-    );
-    mask-size: cover;
-    mix-blend-mode: screen;
-    animation: shimmer 1.2s linear infinite both;
-    pointer-events: none;
-}
-
-.button-cta:hover .shimmer::before,
-.button-cta:hover .shimmer::after,
-.button-cta.active .shimmer::before,
-.button-cta.active .shimmer::after {
-    opacity: 1;
-    animation: shine 1.5s ease-in 1 forwards;
-}
-
-.button-cta .shimmer::before,
-.button-cta .shimmer::after {
-    transition: all 0.35s ease;
-    opacity: 0;
-    content: "";
-    border-radius: inherit;
-    position: absolute;
-    mix-blend-mode: color;
-    inset: 40px;
-    pointer-events: none;
-}
-
-.button-cta .shimmer::before {
-    box-shadow: 0 0 3px 2px hsl(var(--glow-hue) 0% 95%),
-      0 0 7px 4px hsl(var(--glow-hue) 0% 80%),
-      0 0 13px 4px hsl(var(--glow-hue) 0% 70%),
-      0 0 25px 5px hsl(var(--glow-hue) 0% 70%);
-    z-index: -1;
-}
-
-.button-cta .shimmer::after {
-    box-shadow: inset 0 0 0 1px hsl(var(--glow-hue) 0% 95%),
-      inset 0 0 2px 1px hsl(var(--glow-hue) 0% 80%),
-      inset 0 0 5px 2px hsl(var(--glow-hue) 0% 70%);
-    z-index: 2;
-}
-
 /* Responsive Adjustments */
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+    .button-cta { padding: 0.5rem 1.82rem 0.8rem 1.8rem; }
+    .button-cta .text { font-size: 1.4rem; line-height: 1.1; }
+}
+
+@media screen and (min-width: 1280px) and (max-width: 1439px) {
+    .button-cta { padding: 0.35rem 1.57rem 0.68rem 1.6rem; }
+    .button-cta .text { font-size: 1.3rem; line-height: 1.1; }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1279px) {
+    .button-cta { padding: 0.30rem 1.47rem 0.63rem 1.5rem; }
+    .button-cta .text { font-size: 1.25rem; line-height: 1.1; }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .button-cta { padding: 0.24rem 1.2rem 0.64rem 1.2rem; }
+    .button-cta .text { font-size: 1.2rem; line-height: 1.1; }
+}
+
+@media screen and (min-width: 479px) and (max-width: 767px) {
+    .button-cta { padding: 0.2rem 1.2rem 0.64rem 1.2rem; }
+    .button-cta .text { font-size: 1.2rem; line-height: 1.1; }
+}
+
 @media screen and (max-width: 478px) {
-    .button-cta {
-        padding: 0.36rem 1.28rem 0.74rem 1.3rem;
-    }
-    .button-cta .text {
-        font-size: 1.45rem;
-        line-height: 1.3;
-    }
+    .button-cta { padding: 0.36rem 1.28rem 0.74rem 1.3rem; }
+    .button-cta .text { font-size: 1.2rem; line-height: 1.1; }
 }

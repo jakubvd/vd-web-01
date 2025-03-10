@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         {
             className: '.obj-d-mobile',
-            svgPath: 'https://cdn.prod.website-files.com/671fe555f2f51c189f2cc584/67cf6dc3b482f0791b874575_visiondevs%20logo%20-%202.1.svg',
+            svgPath: 'https://cdn.prod.website-files.com/671fe555f2f51c189f2cc584/67cf70778f5995fe1b39abe6_visiondevs%20logo%20-%202.2.svg',
             scale: 0.1,
             color: 0x131211,
         },

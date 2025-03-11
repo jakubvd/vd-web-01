@@ -209,31 +209,31 @@
 
 /* Responsive Adjustments */
 @media screen and (min-width: 1440px) and (max-width: 1919px) {
-    .button-cta { padding: 0.5rem 1.82rem 0.7rem 1.8rem; }
+    .button-cta { padding: 0.55rem 1.82rem 0.7rem 1.8rem; }
     .button-cta .text { font-size: 1.4rem; line-height: 1.1; }
 }
 
 @media screen and (min-width: 1280px) and (max-width: 1439px) {
-    .button-cta { padding: 0.35rem 1.57rem 0.45rem 1.6rem; }
+    .button-cta { padding: 0.35rem 1.57rem 0.5rem 1.6rem; }
     .button-cta .text { font-size: 1.3rem; line-height: 1.1; }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1279px) {
-    .button-cta { padding: 0.30rem 1.47rem 0.40rem 1.5rem; }
+    .button-cta { padding: 0.30rem 1.47rem 0.45rem 1.5rem; }
     .button-cta .text { font-size: 1.25rem; line-height: 1.1; }
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
-    .button-cta { padding: 0.24rem 1.2rem 0.34rem 1.2rem; }
+    .button-cta { padding: 0.24rem 1.2rem 0.4rem 1.2rem; }
     .button-cta .text { font-size: 1.2rem; line-height: 1.1; }
 }
 
 @media screen and (min-width: 479px) and (max-width: 767px) {
-    .button-cta { padding: 0.2rem 1.2rem 0.3rem 1.2rem; }
+    .button-cta { padding: 0.2rem 1.2rem 0.35rem 1.2rem; }
     .button-cta .text { font-size: 1.2rem; line-height: 1.1; }
 }
 
 @media screen and (max-width: 478px) {
-    .button-cta { padding: 0.36rem 1.28rem 0.46rem 1.3rem; }
+    .button-cta { padding: 0.36rem 1.28rem 0.5rem 1.3rem; }
     .button-cta .text { font-size: 1.2rem; line-height: 1.1; }
 }

@@ -30,8 +30,8 @@
 
 /* Selection styles */
 ::selection {
-    color: #0ABF53;
-    background-color: rgba(10, 191, 83, 0.1);
+    color: #e9e9e9;
+    background-color: rgba(7, 7, 7, 0.2);
 }
 
 

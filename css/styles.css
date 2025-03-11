@@ -102,7 +102,7 @@
     letter-spacing: 0px;
     color: var(--black-1-button);
     background-color: var(--black-tint-cards-button);
-    padding: 0.75rem 1.98rem 0.88rem 2.0rem;
+    padding: 0.75rem 1.98rem 0.9rem 2.0rem;
     margin: 0.5rem auto 0 auto;
     position: relative;
     z-index: 30;

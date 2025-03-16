@@ -204,10 +204,10 @@
 
   .button-cta .text {
     font-family: 'Aspekta', sans-serif;
-    font-weight: 700;
+    font-weight: 900;
     font-size: 1.5rem;
     line-height: 1.1;
-    letter-spacing: 0px;
+    letter-spacing: -0.5px;
     color: var(--black-1-button);
     outline: none;
     transition: none;

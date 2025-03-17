@@ -240,5 +240,5 @@
 
 @media screen and (max-width: 478px) {
     .button-cta { padding: 8px 20px 13px 20px; min-height: 44px; }
-    .button-cta .text { font-size: 18px; line-height: 1; }
+    .button-cta .text { font-size: 20px; line-height: 1; }
 }

@@ -234,7 +234,7 @@
 }
 
 @media screen and (min-width: 479px) and (max-width: 767px) {
-    .button-cta { padding: 0.2rem 1.2rem 0.35rem 1.2rem; }
+    .button-cta { padding: 0.22rem 1.2rem 0.5rem 1.2rem; }
     .button-cta .text { font-size: 1.2rem; line-height: 1.1; }
 }
 

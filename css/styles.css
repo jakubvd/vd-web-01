@@ -31,7 +31,7 @@
 /* Selection styles */
 ::selection {
     color: #e9e9e9;
-    background-color: rgba(7, 7, 7, 0.7);
+    background-color: rgba(7, 7, 7, 0.13);
 }
 
 @media screen and (max-width: 991px) {

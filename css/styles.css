@@ -214,7 +214,7 @@
 
 /* Responsive Adjustments */
 @media screen and (min-width: 1440px) and (max-width: 1919px) {
-    .button-cta { padding: 0.55rem 1.82rem 0.78rem 1.8rem; }
+    .button-cta { padding: 0.55rem 1.82rem 0.75rem 1.8rem; }
     .button-cta .text { font-size: 1.4rem; line-height: 1.1; }
 }
 

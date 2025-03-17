@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
             void main() {
                 vec2 uv = vUv * 2.0;
                 float n = random(uv);
-                gl_FragColor = vec4(vec3(1.26 - n), 0.5);
+                gl_FragColor = vec4(vec3(1.26 - n), 0.2);
             }
         `;
 

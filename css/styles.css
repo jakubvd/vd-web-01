@@ -1,4 +1,4 @@
-/* General Styles */
+/* Headings Styles */
 .cursor {
     display: inline-block;
     width: 1ch;
@@ -31,9 +31,8 @@
 /* Selection styles */
 ::selection {
     color: #e9e9e9;
-    background-color: rgba(7, 7, 7, 0.1);
+    background-color: rgba(7, 7, 7, 0.7);
 }
-
 
 @media screen and (max-width: 991px) {
     * {
@@ -220,7 +219,7 @@
 }
 
 @media screen and (min-width: 1280px) and (max-width: 1439px) {
-    .button-cta { padding: 0.35rem 1.57rem 0.582rem 1.6rem; }
+    .button-cta { padding: 0.35rem 1.57rem 0.6rem 1.6rem; }
     .button-cta .text { font-size: 1.3rem; line-height: 1.1; }
 }
 
